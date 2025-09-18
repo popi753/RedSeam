@@ -1,4 +1,24 @@
-# React + TypeScript + Vite
+# My React + TypeScript + Vite
+
+A simple web app built with React, TypeScript, and Vite.
+
+## 🚀 Features
+- ⚛️ React 18 with TypeScript
+- 📦 Vite for fast bundling
+- 🔗 React Router DOM for routing
+
+
+# detailed commit message
+
+Add SVG assets and implement layout structure
+
+- Created a Layout component to manage the header and navigation.
+- Added avatar, cart, and logo SVG assets to the project.
+- Added routes for Home/Products, Auth, Product, and a Missing page for handling wrong urls.
+- Styled the application with CSS, including a reset stylesheet and specific styles for layout and components.
+
+
+
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -67,3 +87,6 @@ export default tseslint.config([
   },
 ])
 ```
+
+
+
