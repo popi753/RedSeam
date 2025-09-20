@@ -11,7 +11,6 @@ body {
     flex-direction: column;
     justify-content: center;
     place-items: center;
-
     font-family: 'Poppins', sans-serif;
 }
 
@@ -22,6 +21,7 @@ body {
   flex-flow: column wrap;
   text-align: center;
   font-weight: 400;
+  letter-spacing: 0;
   color-scheme: light;
   color: black;
   background-color: white;

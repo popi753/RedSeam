@@ -8,10 +8,8 @@ import cart from "./../assets/cart.svg"
 import avatar_photo from "./../assets/avatar-photo.svg"
 
 
-
-
 export default function Layout() {
-    const [user, setUser] = useState(true);
+    const [user, _setUser] = useState(true);
 
     return (
         <>
@@ -51,14 +49,11 @@ export default function Layout() {
                 }
 
 
-                    
-                
                     </nav>
         </header>
-           <div className="main-container">
-            
+           <main className="main-container">
                            <Outlet/>
-           </div>
+           </main>
 
 
         </>

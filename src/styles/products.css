@@ -1,0 +1,116 @@
+.products-container {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.products-header {
+    display: flex;
+    align-items: center;
+    padding: 100px 100px 10px 100px;
+}
+
+.products-title {
+    font-size: 42px;
+    font-weight: 600;
+}
+
+.line {
+    border: 1px solid #e1dfe1;
+    height: 14px;
+}
+
+.products-sort-container {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    gap: 32px;
+}
+
+.results-found {
+    font-size: 12px;
+}
+
+.dropdown-container {
+    display: flex;
+    flex-flow: column;
+    height: max-content;
+}
+
+.dropdown-menu {
+    display: flex;
+    flex-flow: column;
+
+    position: absolute;
+    right: -15px;
+    top: 30px;
+
+    border-radius: 8px;
+    border: 1px #e1dfe1 solid;
+    background-color: white;
+}
+
+.products-body {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 24px;
+    flex-grow: 1;
+    padding: 10px 100px 100px 100px;
+}
+
+.products-body_list {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 24px;
+    width: 1720px;
+    flex-grow: 1;
+}
+
+.products-body_pagination {
+    margin-top: 20px;
+    display: flex;
+    width: 1720px;
+    flex-flow: column;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-container {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+}
+
+.arrow-left,
+.arrow-right {
+    position: absolute;
+    width: 5.75px;
+    height: 10px;
+    top: 5px;
+    left: 7px;
+}
+
+.pagination-btn {
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    border: 1px solid #e1dfe1;
+    border-radius: 4px;
+    font-family: "Sf Pro Text", "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.active-page {
+    border-color: #ff4000;
+    color: #ff4000;
+}

@@ -1,0 +1,92 @@
+.filter-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.filter-wrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.filter {
+  position: absolute;
+  width: 16.5px;
+  height: 15px;
+  top: 4.5px;
+  left: 3.75px;
+}
+
+
+
+.filter-dropdown {
+  width: 392px;
+}
+
+.filter-dropdown-container {
+  padding: 16px;
+  gap: 20px;
+}
+
+.filter-dropdown p {
+  align-self: flex-start;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.filter-form {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+
+.filter-input-container {
+  display: flex;
+  flex-flow: row;
+  gap: 10px;
+}
+
+.filter-input-wrapper {
+  position: relative;
+  width: 250px;
+}
+
+.filter-input-container input {
+  height: 42px;
+  padding-left: 5px;
+  border: 1px solid #E1DFE1;
+  border-radius: 8px;
+}
+
+.filter-input-container label {
+  align-self: center;
+  position: absolute;
+  left: 12px;
+  top: 15px;
+  font-size: 14px;
+}
+
+
+.filter-input-container .required {
+  color: red;
+}
+
+.filter-input-container input:focus+label,
+.filter-input-container input:not(:placeholder-shown)+label {
+  display: none;
+}
+
+
+.filter-apply-btn {
+  align-self: flex-end;
+  background-color: #FF4000;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 124px;
+  height: 42px;
+}
