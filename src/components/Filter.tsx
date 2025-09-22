@@ -35,7 +35,7 @@ export default function Filter({ setFrom, setTo }: filterProps) {
         <>
             <details ref={detailsRef}>
                 <summary className="filter-summary">
-                    <div className="filter-wrapper">
+                    <div className="icon-wrapper-big">
                         <img className="filter" src={filter} alt="filter" />
                     </div>
                     <p className="filter-label">Filter</p>

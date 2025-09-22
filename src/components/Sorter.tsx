@@ -32,7 +32,7 @@ export default function Sorter({ sort, setSort }: sorterProps) {
           <p>{sort === "created_at" ? "New Products First" :
               sort === "-price" ? "Price, high to low" :
               sort === "price" ? "Price, low to high" : "Sort by"}</p>
-          <div className="sort-wrapper">
+          <div className="icon-wrapper-small">
             <img className="arrow-down" src={arrow_down} alt="arrow down" />
           </div>
         </summary>

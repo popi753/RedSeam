@@ -1,0 +1,105 @@
+.auth-page{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.auth-img-container{
+    width: 948px;
+    height: 1000px;
+    background-image: url('../assets/auth-image.png');
+    background-position-x: left;
+    background-position-y: top;
+    background-repeat: no-repeat;
+    background-size: 2000px 1200px;
+}
+
+.auth-component-container{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.auth-container{
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    margin-bottom: 150px;
+}
+
+.auth-form-title {
+    font-size: 42px;
+    font-weight: 600;
+    align-self: flex-start;
+}
+
+.auth-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 46px;
+    width: 100%;
+}
+
+.auth-input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+.auth-input-wrapper {
+  position: relative;
+  width: 554px;
+}
+
+.auth-input-wrapper input {
+    width: 100%;
+}
+
+.input-error{
+    border: 1px solid var(--orange-color);
+}
+
+.auth-input-wrapper > .icon-wrapper-small{
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.eye{
+    width: 17px;
+    height: 12px;
+}
+
+.error-msg{
+    color: var(--orange-color);
+    font-size: 10px;
+    font-weight: 300;
+    position: absolute;
+    left: 6px;
+    top: 48px;
+    height:15px;
+}
+
+.auth-btn{
+    width: 100%;
+}
+
+.register-link{
+    margin-top: -24px;
+}
+
+.register-link>span{
+    color: var(--orange-color);
+    cursor: pointer;
+}
+
+.register-link>span:hover{
+    text-decoration: underline;
+}
+

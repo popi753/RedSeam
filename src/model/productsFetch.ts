@@ -7,8 +7,6 @@ export type product = {
   price: number,
 }
 
-
-
 export type meta = {
   current_page: number,
   from: number,
@@ -46,7 +44,7 @@ export async function onFetchProducts({ page, from, to, sort }: onFetchProductsP
         "Accept": "application/json",
       }
     });
-    console.log(response.ok)
+    console.log(response.ok);
     if (!response.ok) {
       throw "something went wrong";
     };
@@ -66,9 +64,6 @@ export async function onFetchProducts({ page, from, to, sort }: onFetchProductsP
   } catch (error: any) {
     throw new Error((error));
   }
-
-
-
 };
 
 

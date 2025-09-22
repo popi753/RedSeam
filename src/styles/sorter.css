@@ -5,11 +5,6 @@
     font-size: 16px;
 }
 
-.sort-wrapper {
-    position: relative;
-    width: 20px;
-    height: 20px;
-}
 
 .arrow-down {
     position: absolute;
@@ -49,6 +44,6 @@
 }
 
 .sort-dropdown li:hover {
-    background-color: #cfcbcb8a;
+    background-color: var(--hover-bg-color);
 
 }

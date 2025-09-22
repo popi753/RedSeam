@@ -24,11 +24,6 @@
     gap: 4px;
 }
 
-.logo-wrapper{
-    width: 24px;
-    height: 24px;
-    position: relative;
-}
 
 .logo{
     position: absolute;
@@ -50,11 +45,6 @@
     gap: 8px;
 }
 
-.avatar-wrapper{
-    width: 20px;
-    height: 20px;
-    position: relative;
-}
 
 .avatar{
     position: absolute;
@@ -83,3 +73,4 @@
 .avatar-photo-wrapper{
     width: 40px;
 }
+

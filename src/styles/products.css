@@ -8,7 +8,7 @@
 .products-header {
     display: flex;
     align-items: center;
-    padding: 100px 100px 10px 100px;
+    padding: 70px 100px 10px 100px;
 }
 
 .products-title {
@@ -81,13 +81,7 @@
     gap: 8px;
 }
 
-.icon-container {
-    position: relative;
-    width: 20px;
-    height: 20px;
-    background-color: transparent;
-    border: none;
-}
+
 
 .arrow-left,
 .arrow-right {
@@ -108,9 +102,11 @@
     font-size: 14px;
     font-weight: 700;
     line-height: 20px;
+    color: black;
+    padding: 0;
 }
 
 .active-page {
-    border-color: #ff4000;
-    color: #ff4000;
+    border-color: var(--orange-color);
+    color: var(--orange-color);
 }

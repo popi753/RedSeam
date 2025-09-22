@@ -58,6 +58,10 @@ summary{
 
 }
 
+input{
+	padding: 0;
+}
+
 li{
 	text-align: left;
 }
