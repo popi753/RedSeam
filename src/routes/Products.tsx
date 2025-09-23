@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react'
-import { useSearchParams, Link, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 import { onFetchProducts, type product, type meta } from '../model/productsFetch'
 
 import '../styles/products.css'
 
-import arrow_left from "../assets/arrow-left.svg"
-import arrow_right from "../assets/arrow-right.svg"
+import x from "../assets/x.svg"
 
 import Filter from '../components/Filter'
 import Sorter from '../components/Sorter'
 import Card from '../components/Card'
-
+import Pagination from '../components/Pagination'
 
 export default function Products() {
 
@@ -43,7 +42,7 @@ export default function Products() {
                 setMeta(res.meta);
             }
         }).catch((err) => { console.error(err.message); setError(true) });
-    }, [page, sort, from, to]);
+    }, [page, sort, from, to, navigate]);
 
 
     return (
@@ -65,10 +64,25 @@ export default function Products() {
 
                     </div>
                 </header>
+
+                            {(from || to) && <div className="filter-applied">
+                                    <p>Price: <span>{from || 0} - {to}</span></p>
+                                    <div className="icon-wrapper-tiny" onClick={() => { setFrom(""); setTo("") }}>
+                                        <img src={x} alt="X" className='x-icon'/>
+                                    </div>
+                                    
+                                    </div>}
+
                 <div className="products-body">
+                    
+                    
+                            
                     {error ? "something went wrong" :
                         <>
+                        
+
                             <div className="products-body_list">
+                                
                                 {meta?.total ? products.map((product) => (
                                     <Card
                                         key={product.id}
@@ -78,32 +92,8 @@ export default function Products() {
                                 }
                             </div>
 
-                            <div className="products-body_pagination">
-                                <div className="pagination-container">
-                                    {meta?.total ? <>
-                                        <Link to={"?page=" + (page == "1" ? 1 : Number(page) - 1)} onClick={() => { setPage(String(Number(page) - 1)) }} className="icon-container">
-                                            <img className="arrow-left" src={arrow_left} alt="arrow_left" />
-                                        </Link>
+                            <Pagination meta={meta} page={page || "1"} setPage={setPage} />
 
-                                        {(meta?.last_page) &&
-                                            new Array(Number(meta.last_page)).fill(0).map((_, index) => {
-                                                return (
-
-                                                    <Link key={index} to={`?page=${index + 1}`} onClick={() => { setPage(String(index + 1)) }}>
-                                                        <button className={"pagination-btn " + (page == String(index + 1) ? "active-page" : "")} >{index + 1}</button>
-                                                    </Link>
-                                                )
-                                            })}
-                                        {/* <button className="pagination-btn">...</button> */}
-                                        <Link to={"?page=" + (Number(page) == meta?.last_page ? page : Number(page) + 1)} onClick={() => { setPage(String(Number(page) + 1)) }} className="icon-container">
-
-                                            <img className="arrow-right" src={arrow_right} alt="arrow_right" />
-                                        </Link>
-                                    </>
-                                        : null
-                                    }
-                                </div>
-                            </div>
                         </>}
                 </div>
             </div>

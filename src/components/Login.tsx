@@ -25,14 +25,12 @@ export default function Login({ setHaveAcc }: loginProps) {
     const [error, setError] = useState<error>({ email: "", password: "" });
 
     function changeVisibility(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-        {
-            const input = (e.currentTarget as HTMLElement)
-                .parentElement?.firstElementChild as HTMLInputElement
-            if (input.type === "password") {
-                input.type = "text";
-            } else {
-                input.type = "password";
-            }
+        const input = (e.currentTarget as HTMLElement)
+            .parentElement?.firstElementChild as HTMLInputElement
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
         }
     };
 

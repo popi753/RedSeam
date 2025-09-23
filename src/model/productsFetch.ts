@@ -49,6 +49,7 @@ export async function onFetchProducts({ page, from, to, sort }: onFetchProductsP
       throw "something went wrong";
     };
     const result = await response.json();
+    console.log(result)
     const obj = {
       products: result.data.map((item: any) => {
         return {

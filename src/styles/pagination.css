@@ -1,0 +1,46 @@
+.products-body_pagination {
+    margin-top: 20px;
+    display: flex;
+    width: 1720px;
+    flex-flow: column;
+}
+
+
+
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+
+
+.arrow-left,
+.arrow-right {
+    position: absolute;
+    width: 5.75px;
+    height: 10px;
+    top: 5px;
+    left: 7px;
+}
+
+.pagination-btn {
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    border: 1px solid #e1dfe1;
+    border-radius: 4px;
+    font-family: "Sf Pro Text", "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    color: black;
+    padding: 0;
+}
+
+.active-page {
+    border-color: var(--orange-color);
+    color: var(--orange-color);
+}

@@ -48,37 +48,6 @@
   width: 250px;
 }
 
-/* .filter-input-container input {
-  padding-left: 10px;
-  
-} */
-
-/* .filter-input-container label {
-  align-self: center;
-  position: absolute;
-  left: 12px;
-  top: 15px;
-  font-size: 14px;
-} */
-
-
-/* .filter-input-container .required {
-  color: red;
-}
-
-.filter-input-container input:focus+label,
-.filter-input-container input:not(:placeholder-shown)+label {
-  display: none;
-} */
-
-
 .filter-apply-btn {
-  /* align-self: flex-end; */
-  /* color: white; */
-  /* border: none; */
-  /* border-radius: 10px; */
-  /* padding: 10px 20px; */
-  /* cursor: pointer; */
   width: 124px;
-  /* height: 42px; */
 }

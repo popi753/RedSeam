@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
+  --text-color:#000000;
+  --background-color: #ffffff;
   --dark-blue: #10151F;
   --dark-blue2: #3E424A;
   --border-color: #E1DFE1;
@@ -9,15 +11,15 @@
 }
 
 body {
-  box-sizing: unset;
-  width: 1920px;
-  min-height: 1080px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  place-items: center;
-  font-family: 'Poppins', sans-serif;
-  border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    width: 1920px;
+    min-height: 1080px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid black;
 }
 
 #root {
@@ -42,37 +44,6 @@ input {
   height: 42px;
 }
 
-.required {
-  color: var(--error-color);
-}
-
-
-body {
-    box-sizing: unset;
-    width: 1920px;
-    min-height: 1080px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    place-items: center;
-    font-family: 'Poppins', sans-serif;
-    border: 1px solid black;
-}
-
-#root {
-  width: 100%;
-  flex-grow: 1;
-  display: flex;
-  flex-flow: column wrap;
-  text-align: center;
-  font-weight: 400;
-  letter-spacing: 0;
-  color-scheme: light;
-  color: black;
-  background-color: white;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-}
 
 
 label{
@@ -111,6 +82,18 @@ button{
     background-color: transparent;
     border: none;
 }
+
+.icon-wrapper-tiny{
+    position: relative;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+}
+.icon-wrapper-tiny:hover{
+  background-color: var(--hover-bg-color);
+}
+
+
 
 .icon-wrapper-small{
     position: relative;

@@ -39,7 +39,7 @@
   gap: 8px;
 }
 
-.avatar-actions > *{
+.avatar-actions > * {
 font-size: 14px;
 }
 
@@ -56,10 +56,10 @@ font-size: 14px;
   top: 0;
 }
 
-.remove{
+.remove {
     color: var(--dark-blue2);
 }
 
-.avatar-wrapper > .error-msg{
+.avatar-wrapper > .error-msg {
     top: 110px;
 }

@@ -1,11 +1,15 @@
-feat: Update website branding and layout
+feat: Add authentication system with login and registration
 
-- Changed the favicon to a new image from the RedSeam project.
-- Updated the title of the website to "RedSeam Clothing".
-- Modified routing for product details to include product ID in the URL.
-- Enhanced Products component with pagination, filtering, and sorting functionalities.
-- Added new styles for product display, filtering, and sorting components.
-- Created new Card, Filter, and Sorter components for better modularity.
-- Implemented API fetching for products with error handling.
-- Added new SVG assets for arrows and filter icons.
+- Create user context for authentication state
+- Implement user token persistence
+- Add TypeScript types for user and context
+- Implement login/register forms with validation
+- Add password visibility toggle functionality
+- Create auth API service with error handling
+- Add avatar upload for registration
+- Add avatar display with fallback image
+- Create reusable icon wrapper components
+- remove redundant code
+
+
 

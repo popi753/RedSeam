@@ -10,6 +10,7 @@ import Product from "./routes/Product"
 import Missing from "./routes/Missing"
 import Layout from "./components/Layout"
 
+
 type user = {
   email : string,
   avatar: string | null,
