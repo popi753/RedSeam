@@ -1,15 +1,8 @@
-feat: Add authentication system with login and registration
+feat: create product page with its components, little rework of styles/classNames
 
-- Create user context for authentication state
-- Implement user token persistence
-- Add TypeScript types for user and context
-- Implement login/register forms with validation
-- Add password visibility toggle functionality
-- Create auth API service with error handling
-- Add avatar upload for registration
-- Add avatar display with fallback image
-- Create reusable icon wrapper components
-- remove redundant code
-
-
-
+-create product page
+-create product components (product info, product image, product description, color picker, size picker)
+-added global css styles in main.css
+-reworked some styles/classNames in other components
+-added filter-applied
+-orange-btn className
