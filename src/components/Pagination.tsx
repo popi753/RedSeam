@@ -26,7 +26,6 @@ export default function Pagination({ meta, page, setPage }: paginationProps ) {
                                         {(meta?.last_page) &&
                                             new Array(Number(meta.last_page)).fill(0).map((_, index) => {
                                                 return (
-
                                                     <Link key={index} to={`?page=${index + 1}`} onClick={() => { setPage(String(index + 1)) }}>
                                                         <button className={"pagination-btn " + (page == String(index + 1) ? "active-page" : "")} >{index + 1}</button>
                                                     </Link>

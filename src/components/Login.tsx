@@ -73,7 +73,7 @@ export default function Login({ setHaveAcc }: loginProps) {
                             <span className="error-msg">{error.password}</span>
                         </div>
                     </div>
-                    <button className='auth-btn' type="submit">Login</button>
+                    <button className='orange-btn' type="submit">Login</button>
                     <span className='register-link'>Not a member? <span onClick={() => setHaveAcc(prev => !prev)}>Register</span> </span>
                 </form>
             </div>

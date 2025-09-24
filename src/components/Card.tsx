@@ -7,7 +7,7 @@ import { type product } from '../model/productsFetch'
 export default function Card({props}: {props : product}) {
     return(
         <>
-            <Link to={`/product/${props.id}`} className="card-container">
+            <Link to={`/products/${props.id}`} className="card-container">
                 <img src={props.cover_image} alt={props.name} />
                 <div className="card-container_description">
                     <span>{props.name}</span>

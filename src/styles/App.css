@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-  --text-color:#000000;
   --background-color: #ffffff;
   --dark-blue: #10151F;
   --dark-blue2: #3E424A;
   --border-color: #E1DFE1;
   --orange-color: #FF4000;
   --hover-bg-color: #cfcbcb8a;
+  --img-bg-color: #ced6e045;
 }
 
 body {
-    box-sizing: border-box;
+    box-sizing: content-box;
     width: 1920px;
     min-height: 1080px;
     display: flex;
@@ -31,48 +31,27 @@ body {
   font-weight: 400;
   letter-spacing: 0;
   color-scheme: light;
-  color: var(--text-color);
+  color: var(--dark-blue);
   background-color: var(--background-color);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
 
-input {
-  padding-left: 10px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  height: 42px;
-}
-
-
-
-label{
-  color: var(--dark-blue2);
-  position: absolute;
-  left: 13px;
-  top: 13px;
-  font-size: 14px;
-}
 
 .required {
   color: var(--orange-color);
 }
 
-
-input:focus+label,
-input:not(:placeholder-shown)+label {
-  display: none;
-}
-
-button{
+.orange-btn{
   background-color: var(--orange-color);
   align-self: flex-end;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 10px;
   padding: 10px 20px;
   cursor: pointer;
   height: 42px;
+  width: 100%;
 }
 
 .icon-container {
@@ -92,8 +71,6 @@ button{
 .icon-wrapper-tiny:hover{
   background-color: var(--hover-bg-color);
 }
-
-
 
 .icon-wrapper-small{
     position: relative;

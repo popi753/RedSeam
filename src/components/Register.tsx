@@ -141,7 +141,7 @@ export default function Register({ setHaveAcc }: registerProps) {
                             <span className="error-msg">{error.password_confirmation}</span>
                         </div>
                     </div>
-                    <button className='auth-btn' type="submit">Register</button>
+                    <button className='orange-btn' type="submit">Register</button>
                     <span className='register-link'>Already member? <span onClick={() => setHaveAcc(prev => !prev)}>Log in</span> </span>
                 </form>
             </div>

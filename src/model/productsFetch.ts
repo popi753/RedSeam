@@ -31,7 +31,7 @@ type onFetchProductsProps = {
 
 export async function onFetchProducts({ page, from, to, sort }: onFetchProductsProps): Promise<result | Error> {
 
-  let finalurl = url + "/products"
+  const finalurl = url + "/products"
     + (page ? "?page=" + page : "")
     + (from ? (page ? "&" : "?") + "filter[price_from]=" + from : "")
     + (to ? ((page || from) ? "&" : "?") + "filter[price_to]=" + to : "")
@@ -49,7 +49,7 @@ export async function onFetchProducts({ page, from, to, sort }: onFetchProductsP
       throw "something went wrong";
     };
     const result = await response.json();
-    console.log(result)
+
     const obj = {
       products: result.data.map((item: any) => {
         return {
@@ -66,6 +66,57 @@ export async function onFetchProducts({ page, from, to, sort }: onFetchProductsP
     throw new Error((error));
   }
 };
+
+type onFetchProductProps = {
+  id: string
+}
+
+
+export type productObj = {
+  id: number,
+  name: string,
+  description: string,
+  release_year: string,
+  cover_image: string,
+  images: string[],
+  price: number,
+  available_colors: string[],
+  available_sizes: string[],
+  brand: {
+    id: number,
+    name: string,
+    image: string
+  },
+  total_price: number,
+  quantity: number,
+  color: string,
+  size: string
+}
+ 
+
+
+
+export async function onFetchProduct({id}:onFetchProductProps): Promise<productObj | Error> {
+
+  const finalurl = url + "/products/" + id;
+
+  try {
+    const response = await fetch(finalurl, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+      }
+    });
+    console.log(response.ok);
+    if (!response.ok) {
+      throw "something went wrong";
+    };
+    const result = await response.json();
+    return result;
+  } catch (error: any) {
+    throw new Error((error));
+  }
+}
 
 
 

@@ -47,7 +47,7 @@ export default function Products() {
 
     return (
         <>
-            <div className="products-container">
+            <div className="listing-page">
                 <header className="products-header">
                     <p className="products-title">Products</p>
                     <div className="products-sort-container">
@@ -57,7 +57,7 @@ export default function Products() {
                             </p> : null}
 
                         </div>
-                        <div className="line"></div>
+                        <div className="vertical-line"></div>
 
                         <Filter setFrom={setFrom} setTo={setTo} />
                         <Sorter sort={sort} setSort={setSort} />
@@ -65,24 +65,18 @@ export default function Products() {
                     </div>
                 </header>
 
-                            {(from || to) && <div className="filter-applied">
-                                    <p>Price: <span>{from || 0} - {to}</span></p>
-                                    <div className="icon-wrapper-tiny" onClick={() => { setFrom(""); setTo("") }}>
-                                        <img src={x} alt="X" className='x-icon'/>
-                                    </div>
-                                    
-                                    </div>}
+                {(from || to) && <div className="filter-applied">
+                    <p>Price: <span>{from || 0} - {to || "∞"}</span></p>
+                    <div className="icon-wrapper-tiny" onClick={() => { setFrom(""); setTo("") }}>
+                        <img src={x} alt="X" className='x-icon' />
+                    </div>
+
+                </div>}
 
                 <div className="products-body">
-                    
-                    
-                            
                     {error ? "something went wrong" :
                         <>
-                        
-
                             <div className="products-body_list">
-                                
                                 {meta?.total ? products.map((product) => (
                                     <Card
                                         key={product.id}
@@ -91,9 +85,7 @@ export default function Products() {
                                 )) : "No products found"
                                 }
                             </div>
-
                             <Pagination meta={meta} page={page || "1"} setPage={setPage} />
-
                         </>}
                 </div>
             </div>

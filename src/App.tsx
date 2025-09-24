@@ -35,7 +35,7 @@ function App() {
                         <Route index  element={<Products />} />
                         <Route path="/checkout" element={<Checkout />} />
                         <Route path="/auth" element={<Auth />} />
-                        <Route path="/product/:id" element={<Product />} />
+                        <Route path="/products/:id" element={<Product />} />
             
                         
                         <Route path="*" element={<Missing />} />
