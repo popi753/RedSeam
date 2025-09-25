@@ -1,5 +1,5 @@
 
-import '../styles/availableolor.css'
+import '../styles/availableColor.css'
 
 type Props = {
     colorName: string;
