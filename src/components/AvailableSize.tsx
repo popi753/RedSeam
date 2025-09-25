@@ -1,5 +1,5 @@
 
-import '../styles/available-size.css'
+import '../styles/availableSize.css'
 
 
 type props = {
@@ -8,7 +8,7 @@ type props = {
     setSelectedSize: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Available_size({size,selectedSize,setSelectedSize}:props) {
+export default function AvailableSize({size,selectedSize,setSelectedSize}:props) {
         return(
             <>
                 <div key={size} className="available-size"

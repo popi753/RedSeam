@@ -64,7 +64,7 @@
     border: 1px solid var(--orange-color);
 }
 
-.auth-input-wrapper > .icon-wrapper-small{
+.auth-input-wrapper > .icon-wrapper-medium{
     position: absolute;
     right: 8px;
     top: 50%;

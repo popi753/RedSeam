@@ -1,0 +1,133 @@
+.overlay {
+  position: fixed;
+  inset: 0; 
+  background-color: var(--overlay-bg-color);
+  z-index: 1000;
+}
+
+
+dialog {
+  width: 540px;
+  height: 1080px;
+  background-color: #ffffff;
+  border: none;
+  border-left: 1px solid var(--border-color);
+  padding: 0;
+  z-index: 1000;
+  margin-top: 0;
+  margin-right: 0;
+  top: 0;
+
+  position: fixed;
+}
+
+.shoppingCart-container{
+  padding: 40px;
+  display: flex;
+  flex-flow: column;
+  height: 1000px;
+}
+
+.shoppingCart-title{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-bottom: 63px;
+}
+
+.shoppingCart-title > p{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.shoppingCart-close{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 7px;
+    left: 7px;
+}
+
+
+
+.shoppingCart-empty{
+  margin-top: 151px;
+  margin-bottom:24px;
+  color: var(--dark-blue);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.ops{
+  font-size: 24px;
+  font-weight: 600;
+  margin: 25px;
+}
+
+.huge-cart{
+  width: 100px;
+  height: 100px;
+  margin-bottom: 32px;
+}
+
+.emptyCart-btn{
+  margin-top: 60px;
+  width: 214px;
+}
+
+
+.shoppingCart-form{
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  height: 1000px;
+}
+
+
+
+.shoppingCart-list{
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    max-height: 600px;
+    overflow-y: scroll;
+}
+
+
+.shoppingCart-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.shoppingCart-list::-webkit-scrollbar-thumb {
+  background-color: #0000004d;
+  border-radius: 4px;
+}
+
+.shoppingCart-list::-webkit-scrollbar-thumb:hover {
+    background-color: #00000080;
+}
+
+
+.shoppingCart-checkout{
+    display: flex;
+    flex-flow: column;
+    gap: 102px;
+}
+
+.shoppingCart-details{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.shoppingCart-details div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.shoppingCart-details-total{
+    font-size: 20px;
+    font-weight: 500;
+}

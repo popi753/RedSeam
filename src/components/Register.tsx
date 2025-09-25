@@ -13,14 +13,7 @@ type registerProps = {
     setHaveAcc: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-
-export default function Register({ setHaveAcc }: registerProps) {
-
-    const navigate = useNavigate();
-
-    const [_user, setUser] = useContext<contextType>(UserContext) || [];
-
-    type error = {
+  type error = {
         username: string,
         email: string,
         password: string,
@@ -28,6 +21,14 @@ export default function Register({ setHaveAcc }: registerProps) {
         avatar: string
     };
 
+
+export default function Register({ setHaveAcc }: registerProps) {
+
+    const navigate = useNavigate();
+
+    const [_user, setUser] = useContext<contextType>(UserContext) || [];
+
+  
     const [error, setError] = useState<error>({ username: "", email: "", password: "", password_confirmation: "", avatar: "" });
 
     const [avatar, setAvatar] = useState<File | null>(null);
@@ -127,7 +128,7 @@ export default function Register({ setHaveAcc }: registerProps) {
                         <div className="auth-input-wrapper">
                             <input minLength={3} type="password" placeholder=" " name='password' id='password' required className={(error.password || error.password_confirmation) ? "input-error" : ""}/>
                             <label htmlFor="password">Password <span className="required">*</span></label>
-                            <div className='icon-wrapper-small' onClick={(e) => changeVisibility(e)}>
+                            <div className='icon-wrapper-medium' onClick={(e) => changeVisibility(e)}>
                                 <img className='eye' src={eye} alt="X" />
                             </div>
                             <span className="error-msg">{error.password}</span>
@@ -135,13 +136,13 @@ export default function Register({ setHaveAcc }: registerProps) {
                         <div className="auth-input-wrapper">
                             <input minLength={3} type="password" placeholder=" " name='password_confirmation' id='password_confirmation' required className={(error.password || error.password_confirmation) ? "input-error" : ""}/>
                             <label htmlFor="password_confirmation">Confirm Password <span className="required">*</span></label>
-                            <div className='icon-wrapper-small' onClick={(e) => changeVisibility(e)}>
+                            <div className='icon-wrapper-medium' onClick={(e) => changeVisibility(e)}>
                                 <img className='eye' src={eye} alt="X" />
                             </div>
                             <span className="error-msg">{error.password_confirmation}</span>
                         </div>
                     </div>
-                    <button className='orange-btn' type="submit">Register</button>
+                    <button className='orange-btn small-btn' type="submit">Register</button>
                     <span className='register-link'>Already member? <span onClick={() => setHaveAcc(prev => !prev)}>Log in</span> </span>
                 </form>
             </div>

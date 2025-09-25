@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import '../styles/product.css'
 
-import { onFetchProduct, type productObj } from "../model/productsFetch";
+import { UserContext, type contextType} from "../App";
 
-import Available_color from "../components/Available-color";
-import Available_size from "../components/Available-size";
+
+import { onFetchProduct, type productObj } from "../model/productsFetch";
+import { onPostCart } from '../model/cart';
+
+
+import AvailableColor from "../components/AvailableColor";
+import AvailableSize from "../components/AvailableSize";
 
 import cart from "../assets/cart.svg"
 
@@ -34,16 +39,24 @@ const colorMap = {
     Khaki: "#F0E68C",
     Olive: "#808000",
 };
+    
+  type formError = {
+        color: string,
+        size: string,
+        quantity: string,
+    };
+type productProps = {
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+export default function Product({ setOpen }: productProps) {
 
-export default function Product() {
-
-
-
+    const [_user,setUser] = useContext<contextType>(UserContext) || [null, () => {}];
 
     const { id } = useParams();
     const [product, setProduct] = useState<productObj | null>(null);
     const [error, setError] = useState<boolean>(false);
+    const [formError, setFormError] = useState<formError>({ color: "", size: "", quantity: "" });
 
     const [imgArr, setImgArr] = useState<string[]>([]);
     const [selectedImg, setSelectedImg] = useState<string>("");
@@ -89,6 +102,40 @@ export default function Product() {
     }, [selectedColor])
 
 
+        function handleSubmit(e:React.FormEvent) {
+                    e.preventDefault();
+                    const form = e.target as HTMLFormElement;
+                    if (Number(product?.quantity) < 1 || !product?.quantity) {
+                            alert("Product is out of stock");
+                            return;
+                        }
+                    const data = {
+                                    quantity:form.quantity.value,
+                                    color:selectedColor,
+                                    size:selectedSize}
+
+                    const token = window.localStorage.getItem("token") || "";
+
+                    if(!token){
+                        setUser && setUser({email: "", avatar: null});
+                        alert("Please log in to add items to your cart.");
+                        return;
+                    }
+
+                    onPostCart({token, data,id:product?.id}).then(res => {
+                        if (res instanceof Error) {
+                            console.error("Product fetch failed");
+                        } else {
+                            setOpen(true);
+                        };
+
+                    }).catch(error => {
+                        console.error("Product fetch failed");
+                        setFormError(prev => ({ ...prev, ...error }));
+                    });
+    }
+
+
     return (
         <>
             {error ? <p className="error-message">Product not found, please try again later.</p> :
@@ -101,18 +148,17 @@ export default function Product() {
                             <div className="product-container_img-list_scroll">
                                 {imgArr.map((img, index) => {
                                     return (
-                                        <div key={index} style={{ backgroundImage: `url(${img})` }}>
-                                        </div>
+                                        <div key={index} className="product-img" style={{ backgroundImage: `url(${img})` }} />
                                     )
                                 })}
 
                             </div>
 
                         </div>
-                        <div className="cover-img" style={{ backgroundImage: `url(${selectedImg})` }}>
+                        <div className="product-img cover-img" style={{ backgroundImage: `url(${selectedImg})` }}/>
 
-                        </div>
                         <div className="product-details">
+                        <form className="add-to-cart-form" onSubmit={(e)=>{handleSubmit(e)}}>
                             <div className="product-details_title">
 
                                 <p >
@@ -125,22 +171,30 @@ export default function Product() {
                             <div className="product-details_form">
 
                                 <div className="product-details_form-wrapper">
-                                    <p>Color: {selectedColor}</p>
+                                    <div>
+                                        <p>Color: {selectedColor}</p>
+                                        <span className="cart-error-msg">{formError.color}</span>
+                                    </div>
                                     <div className="product-details_available-colors-list">
                                         {colorArr.length ? colorArr.map((colorName, index) => (
-                                            <Available_color key={index}
+                                            <AvailableColor key={index}
                                                 colorName={colorName}
                                                 color={colorMap[colorName as keyof typeof colorMap] || ""}
                                                 selectedColor={colorName === selectedColor}
                                                 setSelectedColor={setSelectedColor} />
                                         )) : "Colors not available"}
+                                        
                                     </div>
                                 </div>
                                 <div className="product-details_form-wrapper">
-                                    <p>Size: {selectedSize}</p>
+                                    <div>
+                                        <p>Size: {selectedSize}</p>
+                                            <span className="cart-error-msg">{formError.size}</span>
+                                    </div>
+
                                     <div className="product-details_available-size-list">
                                         {sizeArr.length ? sizeArr.map((size, index) => (
-                                            <Available_size key={index}
+                                            <AvailableSize key={index}
                                                 size={size}
                                                 selectedSize={selectedSize === size}
                                                 setSelectedSize={setSelectedSize} />
@@ -149,7 +203,9 @@ export default function Product() {
                                 </div>
 
                                 <div className="product-details_form-wrapper">
-                                    <p>Quantity</p>
+                                    <div>
+                                        <p>Quantity</p>  <span className="cart-error-msg">{formError.quantity}</span>
+                                    </div>
                                     {product?.quantity ?
                                         <select name="quantity" defaultValue={1}>
                                             {new Array(Number(product?.quantity > 10 ? 10 : product.quantity)).fill(0).map((_, index) => {
@@ -158,13 +214,14 @@ export default function Product() {
                                             }
 
                                         </select> : <p className="out-of-stock">Out of Stock</p>}
+                                   
                                 </div>
                             </div>
-                            <button className="orange-btn add-to-cart-btn">
+                            <button  type="submit" className="orange-btn big-btn add-to-cart-btn" >
                                 <img src={cart} alt="cart icon" />
                                 Add to cart
                             </button>
-
+                        </form>
                             <div className="horizontal-line"></div>
                             <div className="product-details_description">
                                 <div>

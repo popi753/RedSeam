@@ -11,11 +11,19 @@ import avatar from "./../assets/avatar.svg"
 import cart from "./../assets/cart.svg"
 import avatar_photo from "./../assets/avatar-photo.svg"
 
+type layoutProps = {
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-export default function Layout() {
+
+export default function Layout({
+    // cartRef,
+    setOpen}: layoutProps) {
 
     
-    const [user, _setUser] = useContext<contextType>(UserContext) || [];
+
+    
+    const [user, _setUser] = useContext<contextType>(UserContext) || [null, () => {}];
 
     return (
         <>
@@ -36,7 +44,9 @@ export default function Layout() {
             
                 {user?.email ?
                     <div className="header_log-container">
-                        <div className="icon-wrapper-big">
+                        <div className="icon-wrapper-big" onClick={()=>{
+                            setOpen(true);
+                            }}>
                             <img src={cart} className="cart" alt="cart" />
                         </div>
                         <div className="avatar-photo-wrapper">
@@ -47,7 +57,7 @@ export default function Layout() {
                 : 
                     <Link to={"/auth"}>
                         <div className="header_auth-container">
-                            <div className="icon-wrapper-small">
+                            <div className="icon-wrapper-medium">
                                 <img src={avatar} className="avatar" alt="avatar" />
                             </div>
                             Log in
@@ -62,6 +72,7 @@ export default function Layout() {
                            <Outlet/>
            </main>
 
+               
 
         </>
     )

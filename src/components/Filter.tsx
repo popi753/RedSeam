@@ -54,7 +54,7 @@ export default function Filter({ setFrom, setTo }: filterProps) {
                                     <label htmlFor="to">To <span className="required">*</span></label>
                                 </div>
                             </div>
-                            <button className='orange-btn filter-apply-btn' type="submit">Apply</button>
+                            <button className='orange-btn small-btn apply-btn' type="submit">Apply</button>
                         </form>
                     </div>
                 </div>

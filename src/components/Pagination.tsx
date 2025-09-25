@@ -19,7 +19,7 @@ export default function Pagination({ meta, page, setPage }: paginationProps ) {
             <div className="products-body_pagination">
                                 <div className="pagination-container">
                                     {meta?.total ? <>
-                                        <Link to={"?page=" + (page == "1" ? 1 : Number(page) - 1)} onClick={() => { setPage(String(Number(page) - 1)) }} className="icon-container">
+                                        <Link to={"?page=" + (page == "1" ? 1 : Number(page) - 1)} onClick={() => { setPage(String(Number(page) - 1)) }} className="icon-wrapper-medium">
                                             <img className="arrow-left" src={arrow_left} alt="arrow_left" />
                                         </Link>
 
@@ -32,7 +32,7 @@ export default function Pagination({ meta, page, setPage }: paginationProps ) {
                                                 )
                                             })}
                                         {/* <button className="pagination-btn">...</button> */}
-                                        <Link to={"?page=" + (Number(page) == meta?.last_page ? page : Number(page) + 1)} onClick={() => { setPage(String(Number(page) + 1)) }} className="icon-container">
+                                        <Link to={"?page=" + (Number(page) == meta?.last_page ? page : Number(page) + 1)} onClick={() => { setPage(String(Number(page) + 1)) }} className="icon-wrapper-big">
 
                                             <img className="arrow-right" src={arrow_right} alt="arrow_right" />
                                         </Link>

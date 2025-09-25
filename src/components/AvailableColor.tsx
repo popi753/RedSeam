@@ -1,5 +1,5 @@
 
-import '../styles/available-color.css'
+import '../styles/availableolor.css'
 
 type Props = {
     colorName: string;
@@ -8,7 +8,7 @@ type Props = {
     setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Available_color({colorName, color,selectedColor, setSelectedColor }: Props){
+export default function AvailableColor({colorName, color,selectedColor, setSelectedColor }: Props){
 
     return(
         <>

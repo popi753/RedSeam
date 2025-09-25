@@ -1,8 +1,9 @@
-feat: create product page with its components, little rework of styles/classNames
+feat: Implement shopping cart functionality 
 
--create product page
--create product components (product info, product image, product description, color picker, size picker)
--added global css styles in main.css
--reworked some styles/classNames in other components
--added filter-applied
--orange-btn className
+- Added ShoppingCart component to manage cart items and display.
+- Integrated cart item management with add, update, and delete functionalities.
+- Updated Product component to handle adding items to the cart.
+- Introduced new API functions for cart operations (fetch, add, update, delete).
+- Enhanced UI with new styles for cart, product options, and buttons.
+- Implemented error handling for cart operations.
+- Refactored existing components to improve code organization and readability.

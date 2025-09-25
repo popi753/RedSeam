@@ -8,6 +8,7 @@
   --orange-color: #FF4000;
   --hover-bg-color: #cfcbcb8a;
   --img-bg-color: #ced6e045;
+  --overlay-bg-color: #00000060;  
 }
 
 body {
@@ -20,9 +21,14 @@ body {
     place-items: center;
     font-family: 'Poppins', sans-serif;
     border: 1px solid black;
+
+  color: var(--dark-blue);
+
 }
 
 #root {
+  position: relative;
+  
   width: 100%;
   flex-grow: 1;
   display: flex;
@@ -31,7 +37,6 @@ body {
   font-weight: 400;
   letter-spacing: 0;
   color-scheme: light;
-  color: var(--dark-blue);
   background-color: var(--background-color);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -44,22 +49,35 @@ body {
 
 .orange-btn{
   background-color: var(--orange-color);
-  align-self: flex-end;
   color: #ffffff;
   border: none;
   border-radius: 10px;
-  padding: 10px 20px;
   cursor: pointer;
-  height: 42px;
   width: 100%;
 }
 
-.icon-container {
-    position: relative;
-    width: 20px;
-    height: 20px;
-    background-color: transparent;
-    border: none;
+.small-btn{
+  height: 41px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.big-btn{
+  height: 59px;
+  padding: 16px 60px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+
+
+
+.icon-wrapper-tiny:hover
+,.icon-wrapper-small:hover
+,.icon-wrapper-big:hover
+,.icon-wrapper-large:hover{
+  background-color: var(--hover-bg-color);
 }
 
 .icon-wrapper-tiny{
@@ -68,11 +86,15 @@ body {
     height: 12px;
     cursor: pointer;
 }
-.icon-wrapper-tiny:hover{
-  background-color: var(--hover-bg-color);
-}
 
 .icon-wrapper-small{
+    position: relative;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.icon-wrapper-medium{
     position: relative;
     width: 20px;
     height: 20px;
@@ -84,4 +106,27 @@ body {
   width: 24px;
   height: 24px;
   cursor: pointer;
+}
+
+.icon-wrapper-large{
+  position: relative;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.icon-wrapper-huge{
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.product-img{
+    background-blend-mode: multiply;
+    background-size: contain;
+    background-color: var(--img-bg-color);
+}
+
+dialog{
+  color: var(--dark-blue);
 }

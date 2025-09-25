@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams, useNavigate } from "react-router-dom";
 
-import { onFetchProducts, type product, type meta } from '../model/productsFetch'
+import {type product, type meta, onFetchProducts} from '../model/productsFetch'
 
 import '../styles/products.css'
 

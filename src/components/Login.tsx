@@ -67,13 +67,13 @@ export default function Login({ setHaveAcc }: loginProps) {
                         <div className="auth-input-wrapper">
                             <input minLength={3} type="password" placeholder=" " name='password' id='password' required className={error.password ? "input-error" : ""}/>
                             <label htmlFor="password">Password <span className="required">*</span></label>
-                            <div className='icon-wrapper-small' onClick={(e) => changeVisibility(e)}>
+                            <div className='icon-wrapper-medium' onClick={(e) => changeVisibility(e)}>
                                 <img className='eye' src={eye} alt="X" />
                             </div>
                             <span className="error-msg">{error.password}</span>
                         </div>
                     </div>
-                    <button className='orange-btn' type="submit">Login</button>
+                    <button className='orange-btn small-btn' type="submit">Login</button>
                     <span className='register-link'>Not a member? <span onClick={() => setHaveAcc(prev => !prev)}>Register</span> </span>
                 </form>
             </div>

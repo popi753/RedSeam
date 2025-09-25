@@ -9,6 +9,7 @@ import Auth from "./routes/Auth"
 import Product from "./routes/Product"
 import Missing from "./routes/Missing"
 import Layout from "./components/Layout"
+import ShoppingCart from "./components/ShoppingCart";
 
 
 type user = {
@@ -18,30 +19,40 @@ type user = {
 
 function App() {
 
+  const token = window.localStorage.getItem("token");
+
+
   useEffect(() => {
       token && setUser({ email: " ", avatar: null });
-    }, []);
+    }, [token]);
 
-  const token = window.localStorage.getItem("token");
+
   
   const [user, setUser] = useState<user>({ email: "", avatar: null });
+  const [open,setOpen] = useState<boolean>(false);
 
   return(
     <>
         <UserContext.Provider value={[user, setUser]}>
             
                 <Routes>
-                    <Route path="/" element={<Layout/>}>
+                    <Route path="/" element={<Layout 
+                    // cartRef={cartRef}
+                     setOpen={setOpen}/>}>
                         <Route index  element={<Products />} />
                         <Route path="/checkout" element={<Checkout />} />
                         <Route path="/auth" element={<Auth />} />
-                        <Route path="/products/:id" element={<Product />} />
+                        <Route path="/products/:id" element={<Product setOpen={setOpen} />} />
             
                         
                         <Route path="*" element={<Missing />} />
                   </Route>
             
                 </Routes>
+
+                        {user && <ShoppingCart 
+                         open={open} setOpen={setOpen} />}
+
         </UserContext.Provider>
    
     </>
