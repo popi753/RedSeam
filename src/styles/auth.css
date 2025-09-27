@@ -23,11 +23,12 @@
 }
 
 
-.auth-container{
+.auth-form-container{
     display: flex;
     flex-direction: column;
     gap: 48px;
     margin-bottom: 150px;
+    width: 554px;
 }
 
 .auth-form-title {
@@ -51,40 +52,10 @@
     width: 100%;
 }
 
-.auth-input-wrapper {
-  position: relative;
-  width: 554px;
-}
 
-.auth-input-wrapper input {
-    width: 100%;
-}
 
-.input-error{
-    border: 1px solid var(--orange-color);
-}
 
-.auth-input-wrapper > .icon-wrapper-medium{
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-}
 
-.eye{
-    width: 17px;
-    height: 12px;
-}
-
-.error-msg{
-    color: var(--orange-color);
-    font-size: 10px;
-    font-weight: 300;
-    position: absolute;
-    left: 6px;
-    top: 48px;
-    height:15px;
-}
 
 .register-link{
     margin-top: -24px;

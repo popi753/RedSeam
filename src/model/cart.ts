@@ -23,7 +23,6 @@ export type productObj = {
 }
 
 export async function onFetchCart({token}:cartProps): Promise<productObj[] | Error> {
-
   const finalurl = url + "/cart";
 
   try {
@@ -48,7 +47,6 @@ export async function onFetchCart({token}:cartProps): Promise<productObj[] | Err
 
 
 export async function onPostCart({token, id,data}:cartProps): Promise<void | Error> {
-
   const finalurl = url + "/cart/products/" + id;
   try {
     const response = await fetch(finalurl, {
@@ -119,9 +117,51 @@ export async function onUpdateCart({token, id, data}:cartProps): Promise<void | 
           const result = await response.json(); 
           throw result.message || "something went wrong";
     };
+
   } catch (error: any) {
     throw (error);
   }
 }
 
+type checkoutProps = {
+  token : string;
+  data : {
+      name : string;
+      surname : string;
+      email : string;
+      address : string;
+      zip_code : string;
+  }
 
+}
+
+
+
+export async function onCheckout({token,data}:checkoutProps): Promise<void | Error> {
+  console.log(data)
+  const finalurl = url + "/cart/checkout";
+  try {
+    const response = await fetch(finalurl, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(data)
+    });
+    console.log(response.ok);
+    if (!response.ok) {
+            const result = await response.json(); 
+            for(let item of Object.keys(result.errors)){
+                  result.errors[item] = result.errors[item][0];
+            };
+            throw result.errors || {"name": "something went wrong"};
+    };
+    const result = await response.json();
+    console.log(result)
+
+  } catch (error: any) {
+    throw (error);
+  }
+}

@@ -113,7 +113,6 @@ export default function Product({ setOpen }: productProps) {
                                     quantity:form.quantity.value,
                                     color:selectedColor,
                                     size:selectedSize}
-
                     const token = window.localStorage.getItem("token") || "";
 
                     if(!token){
@@ -126,7 +125,7 @@ export default function Product({ setOpen }: productProps) {
                         if (res instanceof Error) {
                             console.error("Product fetch failed");
                         } else {
-                            setOpen(true);
+                            alert("Product is added to the cart")
                         };
 
                     }).catch(error => {

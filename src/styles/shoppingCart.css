@@ -6,7 +6,7 @@
 }
 
 
-dialog {
+.ShoppingCart-dialog {
   width: 540px;
   height: 1080px;
   background-color: #ffffff;
@@ -81,7 +81,8 @@ dialog {
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  height: 1000px;
+  gap: 10px;
+  height: 100%;
 }
 
 

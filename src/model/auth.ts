@@ -17,13 +17,16 @@ const finalUrl = url + "/register";
         console.log(response.ok);
         if (!response.ok) {
             const result = await response.json(); 
-            for(let item in result.errors){
+            for(let item of Object.keys(result.errors)){
                   result.errors[item] = result.errors[item][0];
             };
             throw result.errors || {"avatar": "something went wrong"};
         };
         const result = await response.json();
         window.localStorage.setItem("token", result.token);
+        window.localStorage.setItem("email", result.user.email);
+
+
         return result;
     } catch (error:any) {
         throw (error);
@@ -53,13 +56,15 @@ const finalUrl = url + "/login";
         console.log(response.ok);
         if (!response.ok) {
             const result = await response.json(); 
-            for(let item in result.errors){
-                  result.errors[item] = result.errors[item][0];
-            };
-            throw result.errors || {"email": result.message} || {"email": "something went wrong"};
+            // for(let item in result.errors){
+            //       result.errors[item] = result.errors[item][0];
+            // };
+            throw result.errors || {"email": result.message, password: result.message} || {"email": "something went wrong"};
+
         };
         const result = await response.json();
         window.localStorage.setItem("token", result.token);
+        window.localStorage.setItem("email", result.user.email);
         return result;
     } catch (error:any) {
         throw (error);

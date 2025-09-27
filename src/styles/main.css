@@ -62,25 +62,9 @@ summary{
 
 }
 
-input {
-  padding: 0px 0px 0px 10px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  height: 42px;
-}
 
-label{
-  color: var(--dark-blue2);
-  position: absolute;
-  left: 13px;
-  top: 13px;
-  font-size: 14px;
-}
 
-input:focus+label,
-input:not(:placeholder-shown)+label {
-  display: none;
-}
+
 
 li{
 	text-align: left;

@@ -26,7 +26,6 @@ function App() {
       token && setUser({ email: " ", avatar: null });
     }, [token]);
 
-
   
   const [user, setUser] = useState<user>({ email: "", avatar: null });
   const [open,setOpen] = useState<boolean>(false);
@@ -37,20 +36,23 @@ function App() {
             
                 <Routes>
                     <Route path="/" element={<Layout 
-                    // cartRef={cartRef}
                      setOpen={setOpen}/>}>
                         <Route index  element={<Products />} />
-                        <Route path="/checkout" element={<Checkout />} />
-                        <Route path="/auth" element={<Auth />} />
                         <Route path="/products/:id" element={<Product setOpen={setOpen} />} />
-            
+                        {user?.email ? 
+                                   <> 
+                                   <Route path="/checkout" element={<Checkout />} />
+                                   </>
+                                   :
+                                   <Route path="/auth" element={<Auth />} />
+                        }
                         
                         <Route path="*" element={<Missing />} />
                   </Route>
             
                 </Routes>
 
-                        {user && <ShoppingCart 
+                        {user?.email && <ShoppingCart 
                          open={open} setOpen={setOpen} />}
 
         </UserContext.Provider>

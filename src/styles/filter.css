@@ -15,7 +15,6 @@
 }
 
 
-
 .filter-dropdown {
   width: 392px;
 }
@@ -43,10 +42,7 @@
   gap: 10px;
 }
 
-.filter-input-wrapper {
-  position: relative;
-  width: 250px;
-}
+
 
 .apply-btn {
   align-self: flex-end;

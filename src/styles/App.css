@@ -9,6 +9,7 @@
   --hover-bg-color: #cfcbcb8a;
   --img-bg-color: #ced6e045;
   --overlay-bg-color: #00000060;  
+  --grey: #F8F6F7 ;
 }
 
 body {
@@ -43,9 +44,7 @@ body {
 }
 
 
-.required {
-  color: var(--orange-color);
-}
+
 
 .orange-btn{
   background-color: var(--orange-color);

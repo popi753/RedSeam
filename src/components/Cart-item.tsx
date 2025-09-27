@@ -19,20 +19,17 @@ export default function Cart_item({item,deleteProduct,updateProduct,open}: cartI
 
   const token = window.localStorage.getItem("token") || "";
 
-    // console.log(item)
     const [count, setCount] = useState(item.quantity || 0);
     useEffect(() => {
         setCount(item.quantity)
     }, [ item.quantity]);
 
-    useEffect(() => {
-        if (count < 0) {
-            setCount(0);
-        }else{
-        updateProduct(token, item.id.toString(), open, {...item, quantity: count});
-            }
-    }, [count]);
+    // useEffect(() => {
 
+    function updateProductQuantity(newQuantity: number) {
+        setCount(newQuantity);
+        updateProduct(token, item.id.toString(), open, {...item, quantity: newQuantity});
+    }
 
 
 
@@ -53,11 +50,11 @@ export default function Cart_item({item,deleteProduct,updateProduct,open}: cartI
 
                                     <div className="shoppingCart-item-quantity">
                                         <div className="shoppingCart-item-counter">
-                                                <button  className="icon-wrapper-small" onClick={() => setCount(count - 1)}>
+                                                <button  className="icon-wrapper-small" onClick={() => updateProductQuantity(count - 1)}>
                                                         <img className="minus" src={minus} alt="-" />
                                                 </button>
                                                 <span>{count}</span>
-                                                <button className="icon-wrapper-small"  onClick={() => setCount(count + 1)}>
+                                                <button className="icon-wrapper-small"  onClick={() => updateProductQuantity(count + 1)}>
                                                    
                                                         <img className="plus" src={plus} alt="+" />
                                                 </button>

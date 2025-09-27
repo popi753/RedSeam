@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { onLogin } from '../model/auth';
 
+import Input from "./Input"
+
 import { UserContext, type contextType } from "../App";
 
 import eye from "./../assets/eye.svg";
@@ -24,16 +26,6 @@ export default function Login({ setHaveAcc }: loginProps) {
 
     const [error, setError] = useState<error>({ email: "", password: "" });
 
-    function changeVisibility(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-        const input = (e.currentTarget as HTMLElement)
-            .parentElement?.firstElementChild as HTMLInputElement
-        if (input.type === "password") {
-            input.type = "text";
-        } else {
-            input.type = "password";
-        }
-    };
-
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setError({ email: "", password: "" });
@@ -47,7 +39,6 @@ export default function Login({ setHaveAcc }: loginProps) {
             setUser && setUser({ email: res.user.email || "", avatar: res.user.avatar || null });
             navigate("/")
         }).catch((error) => {
-            // console.log(error?.message)
             setError(prev => ({ ...prev, ...error }));
         });
 
@@ -55,23 +46,17 @@ export default function Login({ setHaveAcc }: loginProps) {
 
     return (
         <>
-            <div className="auth-container">
+            <div className="auth-form-container">
                 <span className='auth-form-title'>Log In</span>
                 <form className='auth-form' onSubmit={(e) => handleSubmit(e)}>
                     <div className="auth-input-container">
-                        <div className="auth-input-wrapper">
-                            <input minLength={3} type="email" placeholder=" " name='email' id='email' autoComplete='off' required className={error.email ? "input-error" : ""}/>
-                            <label htmlFor="email">Email <span className="required">*</span></label>
-                            <span className="error-msg">{error.email}</span>
-                        </div>
-                        <div className="auth-input-wrapper">
-                            <input minLength={3} type="password" placeholder=" " name='password' id='password' required className={error.password ? "input-error" : ""}/>
-                            <label htmlFor="password">Password <span className="required">*</span></label>
-                            <div className='icon-wrapper-medium' onClick={(e) => changeVisibility(e)}>
-                                <img className='eye' src={eye} alt="X" />
-                            </div>
-                            <span className="error-msg">{error.password}</span>
-                        </div>
+
+                        <Input minLength={3} type='email' placeholder=' ' id="email" required={true} error={error.email} labelPlaceholder='Email'/>
+
+                        <Input minLength={3} type='password' placeholder=' ' id="password" required={true} error={error.password} labelPlaceholder='Password' 
+                                icon={eye} iconClassName="eye"/>
+
+
                     </div>
                     <button className='orange-btn small-btn' type="submit">Login</button>
                     <span className='register-link'>Not a member? <span onClick={() => setHaveAcc(prev => !prev)}>Register</span> </span>

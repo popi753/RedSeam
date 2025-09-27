@@ -7,6 +7,10 @@
   gap: 15px;
 }
 
+.avatar-wrapper > .error-msg {
+    top: 110px;
+}
+
 .avatar-input {
   display: none;
 }
@@ -60,6 +64,4 @@ font-size: 14px;
     color: var(--dark-blue2);
 }
 
-.avatar-wrapper > .error-msg {
-    top: 110px;
-}
+

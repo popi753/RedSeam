@@ -2,6 +2,8 @@ import { useEffect, useRef} from "react"
 
 import '../styles/filter.css'
 
+import Input from "./Input"
+
 import filter from "./../assets/filter.svg"
 
 type filterProps = {
@@ -45,14 +47,10 @@ export default function Filter({ setFrom, setTo }: filterProps) {
                         <p>Select Price</p>
                         <form className="filter-form" onSubmit={(e) => handleSubmit(e)}>
                             <div className="filter-input-container">
-                                <div className="filter-input-wrapper">
-                                    <input type="number" placeholder=" " id='from' />
-                                    <label htmlFor="from">From <span className="required">*</span></label>
-                                </div>
-                                <div className="filter-input-wrapper">
-                                    <input type="number" placeholder=" " id='to' />
-                                    <label htmlFor="to">To <span className="required">*</span></label>
-                                </div>
+
+                                <Input type="number" placeholder=" " error="" labelPlaceholder="From" id="from" required={false}></Input>
+
+                                <Input type="number" placeholder=" " error="" labelPlaceholder="To" id="to" required={false}></Input>
                             </div>
                             <button className='orange-btn small-btn apply-btn' type="submit">Apply</button>
                         </form>

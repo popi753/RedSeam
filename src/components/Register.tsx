@@ -7,13 +7,15 @@ import { onRegister } from '../model/auth';
 
 import { UserContext, type contextType } from "../App";
 
+import  Input  from "./Input";
+
 import eye from "./../assets/eye.svg";
 
 type registerProps = {
     setHaveAcc: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-  type error = {
+ type error = {
         username: string,
         email: string,
         password: string,
@@ -74,19 +76,9 @@ export default function Register({ setHaveAcc }: registerProps) {
 
     };
 
-    function changeVisibility(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-        const input = (e.currentTarget as HTMLElement)
-            .parentElement?.firstElementChild as HTMLInputElement
-        if (input.type === "password") {
-            input.type = "text";
-        } else {
-            input.type = "password";
-        }
-    };
-
     return (
         <>
-            <div className="auth-container">
+            <div className="auth-form-container">
                 <span className='auth-form-title'>Registration</span>
                 <form className='auth-form' onSubmit={(e) => handleSubmit(e)}>
                     <div className="auth-input-container">
@@ -115,32 +107,15 @@ export default function Register({ setHaveAcc }: registerProps) {
                             </div>
                             <span className="error-msg">{error.avatar}</span>
                         </div>
-                        <div className="auth-input-wrapper">
-                            <input minLength={3} type="text" placeholder=" " name='username' id='username' autoComplete='off' required className={error.username ? "input-error" : ""}/>
-                            <label htmlFor="username">Username <span className="required">*</span></label>
-                            <span className="error-msg">{error.username}</span>
-                        </div>
-                        <div className="auth-input-wrapper">
-                            <input minLength={3} type="email" placeholder=" " name='email' id='email' autoComplete='off' required className={error.email ? "input-error" : ""}/>
-                            <label htmlFor="email">Email <span className="required">*</span></label>
-                            <span className="error-msg">{error.email}</span>
-                        </div>
-                        <div className="auth-input-wrapper">
-                            <input minLength={3} type="password" placeholder=" " name='password' id='password' required className={(error.password || error.password_confirmation) ? "input-error" : ""}/>
-                            <label htmlFor="password">Password <span className="required">*</span></label>
-                            <div className='icon-wrapper-medium' onClick={(e) => changeVisibility(e)}>
-                                <img className='eye' src={eye} alt="X" />
-                            </div>
-                            <span className="error-msg">{error.password}</span>
-                        </div>
-                        <div className="auth-input-wrapper">
-                            <input minLength={3} type="password" placeholder=" " name='password_confirmation' id='password_confirmation' required className={(error.password || error.password_confirmation) ? "input-error" : ""}/>
-                            <label htmlFor="password_confirmation">Confirm Password <span className="required">*</span></label>
-                            <div className='icon-wrapper-medium' onClick={(e) => changeVisibility(e)}>
-                                <img className='eye' src={eye} alt="X" />
-                            </div>
-                            <span className="error-msg">{error.password_confirmation}</span>
-                        </div>
+
+                        <Input minLength={3} type='text' placeholder=' ' id="username" required={true} error={error.username} labelPlaceholder='Username'/>
+
+                        <Input minLength={3} type='email' placeholder=' ' id="email" required={true} error={error.email} labelPlaceholder='Email'/>
+
+                        <Input minLength={3} type='password' placeholder=' ' id="password" required={true} error={error.password} labelPlaceholder='Password' icon={eye} iconClassName= "eye"/>
+
+                        <Input minLength={3} type='password' placeholder=' ' id="password_confirmation" required={true} error={(error.password || error.password_confirmation)} labelPlaceholder='Confirm Password' icon={eye} iconClassName= "eye"/>
+
                     </div>
                     <button className='orange-btn small-btn' type="submit">Register</button>
                     <span className='register-link'>Already member? <span onClick={() => setHaveAcc(prev => !prev)}>Log in</span> </span>
