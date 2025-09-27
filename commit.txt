@@ -1,9 +1,10 @@
-feat: Implement shopping cart functionality 
+Refactor authentication and checkout components; introduce reusable Input component
 
-- Added ShoppingCart component to manage cart items and display.
-- Integrated cart item management with add, update, and delete functionalities.
-- Updated Product component to handle adding items to the cart.
-- Introduced new API functions for cart operations (fetch, add, update, delete).
-- Enhanced UI with new styles for cart, product options, and buttons.
-- Implemented error handling for cart operations.
-- Refactored existing components to improve code organization and readability.
+- Updated App component to conditionally render Checkout and Auth routes based on user authentication.
+- Added new Input component for consistent input handling across forms.
+- Created CheckoutRegister component to manage checkout process and cart interactions.
+- Enhanced Cart-item component to streamline product quantity updates.
+- Implemented error handling and state management for checkout process.
+- Introduced new styles for checkout and input components for improved UI.
+- Added envelope SVG asset for email input field.
+- Cleaned up unused code and optimized existing components for better performance.
