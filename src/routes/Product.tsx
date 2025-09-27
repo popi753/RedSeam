@@ -45,11 +45,9 @@ const colorMap = {
         size: string,
         quantity: string,
     };
-type productProps = {
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-export default function Product({ setOpen }: productProps) {
+
+export default function Product() {
 
     const [_user,setUser] = useContext<contextType>(UserContext) || [null, () => {}];
 

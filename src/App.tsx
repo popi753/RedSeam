@@ -38,7 +38,7 @@ function App() {
                     <Route path="/" element={<Layout 
                      setOpen={setOpen}/>}>
                         <Route index  element={<Products />} />
-                        <Route path="/products/:id" element={<Product setOpen={setOpen} />} />
+                        <Route path="/products/:id" element={<Product/>} />
                         {user?.email ? 
                                    <> 
                                    <Route path="/checkout" element={<Checkout />} />
