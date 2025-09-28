@@ -48,30 +48,11 @@
     color: var(--dark-blue2);
 }
 
-
-
 .shoppingCart-item-remove:hover{
     cursor: pointer;
     text-decoration: underline;
     background-color: var(--hover-bg-color);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .shoppingCart-item-quantity{
     display: flex;
@@ -79,10 +60,6 @@
     align-items: center;
     justify-content: space-between;
 }
-
-
-
-
 
 .shoppingCart-item-counter{
     width: 54px;

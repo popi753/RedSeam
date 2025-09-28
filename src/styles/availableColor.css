@@ -3,7 +3,15 @@
     display: flex;
     flex-flow: row;
     align-items: center;
+    justify-content: center;
     gap: 8px;
+
+    width: 48px;
+    height: 48px;
+    border: 1px solid transparent;
+    transition: border 0.2s ease;
+
+    border-radius: 50%;
 }
 
 .available-color input{
@@ -14,6 +22,4 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    transition: border 0.2s ease;
-    border: 2px solid transparent;
 }

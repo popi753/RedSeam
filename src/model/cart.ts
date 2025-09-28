@@ -33,12 +33,23 @@ export async function onFetchCart({token}:cartProps): Promise<productObj[] | Err
         "Authorization": `Bearer ${token}`
       }
     });
-    console.log(response.ok);
     if (!response.ok) {
       throw "something went wrong";
     };
     const result = await response.json();
-    return result;
+    const res = result.map(((item : any) =>{
+      return{
+              id: item.id,
+              name: item.name,
+              cover_image: item.images[item.available_colors.indexOf(item.color)] || item.cover_image,
+              color: item.color,
+              size: item.size,
+              price: item.price,
+              quantity: item.quantity
+            };
+        
+    }));
+    return res;
   } catch (error: any) {
     throw new Error((error));
   }
@@ -58,7 +69,6 @@ export async function onPostCart({token, id,data}:cartProps): Promise<void | Err
       },
       body: JSON.stringify(data)
     });
-    console.log(response.ok);
     if (!response.ok) {
           const result = await response.json(); 
             for(let item of Object.keys(result.errors)){
@@ -87,7 +97,6 @@ export async function onDeleteCart({token, id, data}:cartProps): Promise<void | 
       },
       body: JSON.stringify(data)
     });
-    console.log(response.ok);
     if (!response.ok) {
           const result = await response.json(); 
           throw result.message || "something went wrong";
@@ -112,7 +121,6 @@ export async function onUpdateCart({token, id, data}:cartProps): Promise<void | 
       },
       body: JSON.stringify(data)
     });
-    console.log(response.ok);
     if (!response.ok) {
           const result = await response.json(); 
           throw result.message || "something went wrong";
@@ -149,7 +157,6 @@ export async function onCheckout({token,data}:checkoutProps): Promise<void | Err
       },
       body: JSON.stringify(data)
     });
-    console.log(response.ok);
     if (!response.ok) {
             const result = await response.json(); 
             for(let item of Object.keys(result.errors)){

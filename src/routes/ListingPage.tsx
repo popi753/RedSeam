@@ -1,19 +1,18 @@
-import { useState, useEffect,useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams, useNavigate } from "react-router-dom";
 
-import {type product, type meta, onFetchProducts} from '../model/productsFetch'
+import { type product, type meta, onFetchProducts } from '../model/productsFetch'
 
-import '../styles/products.css'
-
-import x from "../assets/x.svg"
-
+import close from "../assets/close.svg"
 import Filter from '../components/Filter'
 import Sorter from '../components/Sorter'
 import Card from '../components/Card'
 import Pagination from '../components/Pagination'
 
-export default function Products() {
-    
+import '../styles/products.css'
+
+export default function ListingPage() {
+
     const navigate = useNavigate();
 
     const [products, setProducts] = useState<product[]>([]);
@@ -28,51 +27,54 @@ export default function Products() {
 
     const [error, setError] = useState<boolean>(false);
 
+    const pageArr: (number | string)[] = useMemo(() => {
+        const currentPage = meta?.current_page || 1;
+        const totalPages = meta?.last_page || 1;
+        const pages = [];
+        // Always show first 2 pages
+        for (let i = 1; i <= Math.min(2, totalPages); i++) {
+            pages.push(i);
+        }
 
-    const pageArr : (number | string)[] = useMemo(() => {
-                        const currentPage = meta?.current_page || 1;
-                        const totalPages = meta?.last_page || 1;
-                        const pages = [];
-                        // Always show first 2 pages
-                        for (let i = 1; i <= Math.min(2, totalPages); i++) {
-                            pages.push(i);
-                        }
-                        
-                        // Add dots if gap exists
-                        if (currentPage > 4) {
-                            pages.push('...');
-                        }
-                        
-                        // Add neighbors (current page and adjacent pages)
-                        const start = Math.max(3, currentPage - 1);
-                        const end = Math.min(totalPages - 2, currentPage + 1);
-                        
-                        for (let i = start; i <= end; i++) {
-                            if (!pages.includes(i)) {
-                            pages.push(i);
-                            }
-                        }
-                        
-                        // Add dots if gap exists
-                        if (currentPage < totalPages - 3) {
-                            pages.push('...');
-                        }
-                        
-                        // Always show last 2 pages
-                        for (let i = Math.max(totalPages - 1, 3); i <= totalPages; i++) {
-                            if (!pages.includes(i)) {
-                            pages.push(i);
-                            }
-                        }
-                        
-                        return pages;
-    },[meta?.current_page, meta?.last_page]);
+        // Add dots if gap exists
+        if (currentPage > 4) {
+            pages.push('...');
+        }
+
+        // Add neighbors (current page and adjacent pages)
+        const start = Math.max(3, currentPage - 1);
+        const end = Math.min(totalPages - 2, currentPage + 1);
+
+        for (let i = start; i <= end; i++) {
+            if (!pages.includes(i)) {
+                pages.push(i);
+            }
+        }
+
+        // Add dots if gap exists
+        if (currentPage < totalPages - 3) {
+            pages.push('...');
+        }
+
+        // Always show last 2 pages
+        for (let i = Math.max(totalPages - 1, 3); i <= totalPages; i++) {
+            if (!pages.includes(i)) {
+                pages.push(i);
+            }
+        }
+
+        return pages;
+    }, [meta?.current_page, meta?.last_page]);
 
 
     useEffect(() => {
+        if (Number(from) < 0 && Number(to) < 0 && Number(from) > Number(to)) {
+            alert("Invalid price range");
+            return;
+        }
         onFetchProducts({ page, from, to, sort }).then((res) => {
             if (res instanceof Error) {
-                console.error(res.message);
+                alert(res.message);
                 setError(true);
             } else {
                 if (res.meta.last_page < Number(page)) {
@@ -82,7 +84,7 @@ export default function Products() {
                 setProducts(res.products);
                 setMeta(res.meta);
             }
-        }).catch((err) => { console.error(err.message); setError(true) });
+        }).catch((err) => { alert(err.message); setError(true) });
     }, [page, sort, from, to, navigate]);
 
 
@@ -96,24 +98,18 @@ export default function Products() {
                             {meta ? <p className="results-found">
                                 Showing {meta?.from}-{meta?.to} of {meta?.total} results
                             </p> : null}
-
                         </div>
                         <div className="vertical-line"></div>
-
                         <Filter setFrom={setFrom} setTo={setTo} />
                         <Sorter sort={sort} setSort={setSort} />
-
                     </div>
                 </header>
-
                 {(from || to) && <div className="filter-applied">
                     <p>Price: <span>{from || 0} - {to || "∞"}</span></p>
                     <div className="icon-wrapper-tiny" onClick={() => { setFrom(""); setTo("") }}>
-                        <img src={x} alt="X" className='x-icon' />
+                        <img src={close} alt="X" className='filter-close' />
                     </div>
-
                 </div>}
-
                 <div className="products-body">
                     {error ? "something went wrong" :
                         <>
@@ -127,11 +123,9 @@ export default function Products() {
                                 }
                             </div>
                             {meta?.total ? <Pagination page={page || "1"} setPage={setPage} pageArr={pageArr} /> : null}
-                            
                         </>}
                 </div>
             </div>
-
         </>
     )
 }

@@ -8,24 +8,27 @@ type Props = {
     setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function AvailableColor({colorName, color,selectedColor, setSelectedColor }: Props){
+export default function AvailableColor({ colorName, color, selectedColor, setSelectedColor }: Props) {
 
-    return(
+    return (
         <>
-            <div className="available-color" 
-            onClick={() => setSelectedColor(colorName)}
+            <div className="available-color"
+                style={{
+                    borderColor: selectedColor ? "var(--border-color)" : "transparent",
+                }}
+                onClick={() => setSelectedColor(colorName)}
             >
-                                                <input type="radio" name="color" value={colorName}
-                                                checked={selectedColor}
-                                                onChange={(e) => setSelectedColor(e.target.value)}
-                                                />
-                                                <span style={{
-                                                    borderColor: selectedColor ? "black" : "transparent",
-                                                    background: color,
-                                                }}
-                                                title={colorName}
-                                                />
-                                         </div>
+                <input type="radio" name="color" value={colorName}
+                    checked={selectedColor}
+                    onChange={(e) => setSelectedColor(e.target.value)}
+                />
+                <span style={{
+
+                    background: color,
+                }}
+                    title={colorName}
+                />
+            </div>
         </>
     )
 }

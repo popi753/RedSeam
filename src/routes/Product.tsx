@@ -1,17 +1,15 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-
-import '../styles/product.css'
-
 
 import { onFetchProduct, type productObj } from "../model/productsFetch";
 import { onPostCart } from '../model/cart';
-
 
 import AvailableColor from "../components/AvailableColor";
 import AvailableSize from "../components/AvailableSize";
 
 import cart from "../assets/cart.svg"
+
+import '../styles/product.css'
 
 const colorMap = {
     White: "#ededed",
@@ -37,16 +35,14 @@ const colorMap = {
     Khaki: "#F0E68C",
     Olive: "#808000",
 };
-    
-  type formError = {
-        color: string,
-        size: string,
-        quantity: string,
-    };
 
+type formError = {
+    color: string,
+    size: string,
+    quantity: string,
+};
 
 export default function Product() {
-
 
     const { id } = useParams();
     const [product, setProduct] = useState<productObj | null>(null);
@@ -69,11 +65,10 @@ export default function Product() {
             setError(true);
             return;
         }
-
-
         onFetchProduct({ id: id! }).then((res) => {
             if (res instanceof Error) {
-                console.error(res.message);
+                alert(res.message)
+                setError(true);
             } else {
                 setSelectedImg(res.cover_image);
                 setImgArr(res.images);
@@ -87,46 +82,46 @@ export default function Product() {
                 setProduct(res);
 
             }
-        }).catch((err) => { console.error(err.message); setError(true) });
-
+        }).catch((error) => { alert(error), setError(true); });
     }, []);
+
     useEffect(() => {
         const index = colorArr.indexOf(selectedColor);
         index !== -1 && setSelectedImg(imgArr[index]);
 
     }, [selectedColor])
 
+    const handleSubmit = useCallback((e: React.FormEvent) => {
+        if (!colorArr.length || !sizeArr.length) {
+            alert("Product options are not available");
+            return;
+        }
+        e.preventDefault();
+        const form = e.target as HTMLFormElement;
 
-        function handleSubmit(e:React.FormEvent) {
-                    e.preventDefault();
-                    const form = e.target as HTMLFormElement;
-                    if (Number(product?.quantity) < 1 || !product?.quantity) {
-                            alert("Product is out of stock");
-                            return;
-                        }
-                    const data = {
-                                    quantity:form.quantity.value,
-                                    color:selectedColor,
-                                    size:selectedSize}
-                    const token = window.localStorage.getItem("token") || "";
+        const data = {
+            quantity: form.quantity.value,
+            color: selectedColor,
+            size: selectedSize
+        }
+        const token = window.localStorage.getItem("token") || "";
 
-                    if(!token){
-                        alert("Please log in to add items to your cart.");
-                        return;
-                    }
+        if (!token) {
+            alert("Please log in to add items to your cart.");
+            return;
+        }
 
-                    onPostCart({token, data,id:product?.id}).then(res => {
-                        if (res instanceof Error) {
-                            console.error("Product fetch failed");
-                        } else {
-                            alert("Product is added to the cart")
-                        };
-
-                    }).catch(error => {
-                        console.error("Product fetch failed");
-                        setFormError(prev => ({ ...prev, ...error }));
-                    });
-    }
+        onPostCart({ token, data, id: product?.id }).then(res => {
+            if (res instanceof Error) {
+                alert("Product fetch failed");
+            } else {
+                alert("Product is added to the cart")
+            };
+        }).catch(error => {
+            alert("Product fetch failed");
+            setFormError(prev => ({ ...prev, ...error }));
+        });
+    }, [product?.id, selectedColor, selectedSize]);
 
 
     return (
@@ -148,73 +143,72 @@ export default function Product() {
                             </div>
 
                         </div>
-                        <div className="product-img cover-img" style={{ backgroundImage: `url(${selectedImg})` }}/>
+                        <div className="product-img cover-img" style={{ backgroundImage: `url(${selectedImg})` }} />
 
                         <div className="product-details">
-                        <form className="add-to-cart-form" onSubmit={(e)=>{handleSubmit(e)}}>
-                            <div className="product-details_title">
+                            <form className="add-to-cart-form" onSubmit={(e) => { handleSubmit(e) }}>
+                                <div className="product-details_title">
 
-                                <p >
-                                    {product?.name}
-                                </p>
-                                <p >
-                                    ${product?.price}
-                                </p>
-                            </div>
-                            <div className="product-details_form">
-
-                                <div className="product-details_form-wrapper">
-                                    <div>
-                                        <p>Color: {selectedColor}</p>
-                                        <span className="cart-error-msg">{formError.color}</span>
-                                    </div>
-                                    <div className="product-details_available-colors-list">
-                                        {colorArr.length ? colorArr.map((colorName, index) => (
-                                            <AvailableColor key={index}
-                                                colorName={colorName}
-                                                color={colorMap[colorName as keyof typeof colorMap] || ""}
-                                                selectedColor={colorName === selectedColor}
-                                                setSelectedColor={setSelectedColor} />
-                                        )) : "Colors not available"}
-                                        
-                                    </div>
+                                    <p >
+                                        {product?.name}
+                                    </p>
+                                    <p >
+                                        ${product?.price}
+                                    </p>
                                 </div>
-                                <div className="product-details_form-wrapper">
-                                    <div>
-                                        <p>Size: {selectedSize}</p>
+                                <div className="product-details_form">
+
+                                    <div className="product-details_form-wrapper">
+                                        <div>
+                                            <p>Color: {selectedColor}</p>
+                                            <span className="cart-error-msg">{formError.color}</span>
+                                        </div>
+                                        <div className="product-details_available-colors-list">
+                                            {colorArr.length ? colorArr.map((colorName, index) => (
+                                                <AvailableColor key={index}
+                                                    colorName={colorName}
+                                                    color={colorMap[colorName as keyof typeof colorMap] || ""}
+                                                    selectedColor={colorName === selectedColor}
+                                                    setSelectedColor={setSelectedColor} />
+                                            )) : "Out of Stock"}
+
+                                        </div>
+                                    </div>
+                                    <div className="product-details_form-wrapper">
+                                        <div>
+                                            <p>Size: {selectedSize}</p>
                                             <span className="cart-error-msg">{formError.size}</span>
+                                        </div>
+
+                                        <div className="product-details_available-size-list">
+                                            {sizeArr.length ? sizeArr.map((size, index) => (
+                                                <AvailableSize key={index}
+                                                    size={size}
+                                                    selectedSize={selectedSize === size}
+                                                    setSelectedSize={setSelectedSize} />
+                                            )) : "Out of Stock"}
+                                        </div>
                                     </div>
 
-                                    <div className="product-details_available-size-list">
-                                        {sizeArr.length ? sizeArr.map((size, index) => (
-                                            <AvailableSize key={index}
-                                                size={size}
-                                                selectedSize={selectedSize === size}
-                                                setSelectedSize={setSelectedSize} />
-                                        )) : "Sizes not available"}
-                                    </div>
-                                </div>
+                                    <div className="product-details_form-wrapper">
+                                        <div>
+                                            <p>Quantity</p>  <span className="cart-error-msg">{formError.quantity}</span>
+                                        </div>
 
-                                <div className="product-details_form-wrapper">
-                                    <div>
-                                        <p>Quantity</p>  <span className="cart-error-msg">{formError.quantity}</span>
-                                    </div>
-                                    {product?.quantity ?
                                         <select name="quantity" defaultValue={1}>
-                                            {new Array(Number(product?.quantity > 10 ? 10 : product.quantity)).fill(0).map((_, index) => {
+                                            {new Array(10).fill(0).map((_, index) => {
                                                 return (<option key={index} value={index + 1}>{index + 1}</option>)
                                             })
                                             }
+                                        </select>
 
-                                        </select> : <p className="out-of-stock">Out of Stock</p>}
-                                   
+                                    </div>
                                 </div>
-                            </div>
-                            <button  type="submit" className="orange-btn big-btn add-to-cart-btn" >
-                                <img src={cart} alt="cart icon" />
-                                Add to cart
-                            </button>
-                        </form>
+                                <button type="submit" className="orange-btn big-btn add-to-cart-btn" >
+                                    <img src={cart} alt="cart icon" />
+                                    Add to cart
+                                </button>
+                            </form>
                             <div className="horizontal-line"></div>
                             <div className="product-details_description">
                                 <div>

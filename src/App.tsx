@@ -1,9 +1,8 @@
 import { useState, useEffect, createContext} from 'react'
 
 import { Routes, Route } from "react-router-dom"
-import './styles/App.css'
 
-import Products from "./routes/Products"
+import ListingPage from "./routes/ListingPage"
 import Checkout from "./routes/Checkout"
 import Auth from "./routes/Auth"
 import Product from "./routes/Product"
@@ -11,11 +10,11 @@ import Missing from "./routes/Missing"
 import Layout from "./components/Layout"
 import ShoppingCart from "./components/ShoppingCart";
 
+import './styles/App.css'
 
 function App() {
 
   const token = window.localStorage.getItem("token");
-
 
     useEffect(() => {
         token && setLoggedIn(true);
@@ -32,7 +31,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Layout 
                      setOpen={setOpen}/>}>
-                        <Route index  element={<Products />} />
+                        <Route index  element={<ListingPage/>} />
                         <Route path="/products/:id" element={<Product/>} />
                         {loggedIn ? 
                                    <> 

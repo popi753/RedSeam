@@ -44,7 +44,7 @@
 }
 
 .avatar-actions > * {
-font-size: 14px;
+  font-size: 14px;
 }
 
 .avatar-actions > *:hover {
@@ -65,3 +65,8 @@ font-size: 14px;
 }
 
 
+.camera{
+  position: absolute;
+  width: 18px;
+  height: 18px;
+}

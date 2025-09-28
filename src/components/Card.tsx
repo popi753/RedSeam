@@ -1,19 +1,24 @@
-import {Link} from "react-router-dom";
-
-import '../styles/card.css'
+import { Link } from "react-router-dom";
 
 import { type product } from '../model/productsFetch'
 
-export default function Card({props}: {props : product}) {
-    return(
+import '../styles/card.css'
+
+export default function Card({ props }: { props: product }) {
+
+    return (
         <>
-            <Link to={`/products/${props.id}`} className="card-container">
-                <img src={props.cover_image} alt={props.name} />
+            <Link to={`/products/${props.id}`} className="card-container"  >
+                <div className="product-img card-img" style={{ backgroundImage: `url(${props.cover_image})` }}></div>
+
                 <div className="card-container_description">
-                    <span>{props.name}</span>
+                    <span title={props.name} >{props.name}</span>
                     <span>{`$ ${props.price}`}</span>
                 </div>
             </Link>
+
         </>
-    )    
+
+    )
+
 }

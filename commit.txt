@@ -1,8 +1,6 @@
-refactor: change pagination, change user context with boolean
+Refactor code for optimization
 
-
-- Changed pagination with more dynamic one
-- Changed user context usage with localstorage and left just boolean
-- Finished checkout Page modal 
-- Used state inside email checkout input
-
+- Updated ShoppingCart component to improve code readability and replaced 'x.svg' with 'close.svg'.
+- Removed StrictMode from main.tsx for performance optimization.
+- Streamlined authentication functions in auth.ts for better error handling.
+- Added new assets for camera and close icons.

@@ -21,15 +21,12 @@ body {
     justify-content: center;
     place-items: center;
     font-family: 'Poppins', sans-serif;
-    border: 1px solid black;
-
-  color: var(--dark-blue);
+    color: var(--dark-blue);
 
 }
 
 #root {
   position: relative;
-  
   width: 100%;
   flex-grow: 1;
   display: flex;
@@ -42,8 +39,6 @@ body {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
-
-
 
 
 .orange-btn{
@@ -68,9 +63,6 @@ body {
   font-size: 18px;
   font-weight: 500;
 }
-
-
-
 
 .icon-wrapper-tiny:hover
 ,.icon-wrapper-small:hover

@@ -30,7 +30,6 @@ type onFetchProductsProps = {
 }
 
 export async function onFetchProducts({ page, from, to, sort }: onFetchProductsProps): Promise<result | Error> {
-
   const finalurl = url + "/products"
     + (page ? "?page=" + page : "")
     + (from ? (page ? "&" : "?") + "filter[price_from]=" + from : "")
@@ -44,12 +43,10 @@ export async function onFetchProducts({ page, from, to, sort }: onFetchProductsP
         "Accept": "application/json",
       }
     });
-    console.log(response.ok);
     if (!response.ok) {
       throw "something went wrong";
     };
     const result = await response.json();
-    console.log(result);
     const obj = {
       products: result.data.map((item: any) => {
         return {
@@ -71,7 +68,6 @@ type onFetchProductProps = {
   id: string
 }
 
-
 export type productObj = {
   id: number,
   name: string,
@@ -92,11 +88,9 @@ export type productObj = {
   color: string,
   size: string
 }
- 
 
 
-
-export async function onFetchProduct({id}:onFetchProductProps): Promise<productObj | Error> {
+export async function onFetchProduct({ id }: onFetchProductProps): Promise<productObj | Error> {
 
   const finalurl = url + "/products/" + id;
 
@@ -107,7 +101,6 @@ export async function onFetchProduct({id}:onFetchProductProps): Promise<productO
         "Accept": "application/json",
       }
     });
-    console.log(response.ok);
     if (!response.ok) {
       throw "something went wrong";
     };

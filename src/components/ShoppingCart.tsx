@@ -1,23 +1,19 @@
-import {useState} from "react";
-
+import { useState } from "react";
 
 import CheckoutRegister from "./CheckoutRegister";
 
-import x from "../assets/x.svg"
-
+import close from "../assets/close.svg"
 
 import "../styles/shoppingCart.css"
-
 
 type shoppingCartProps = {
   open: boolean,
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export default function ShoppingCart({ open, setOpen }: shoppingCartProps) {
 
-export default function ShoppingCart({open, setOpen }: shoppingCartProps) {
-
-  const [length,setLength] = useState<number>(0);
+  const [length, setLength] = useState<number>(0);
 
 
   return (
@@ -33,18 +29,18 @@ export default function ShoppingCart({open, setOpen }: shoppingCartProps) {
         }}
       >
         <div className="shoppingCart-container"
-              onClick={(e) => { e.stopPropagation(); }}>
+          onClick={(e) => { e.stopPropagation(); }}>
 
           <div className="shoppingCart-title">
             <p>Shopping cart ({length || 0}) </p>
-            <div className="icon-wrapper-large" onClick={()=>setOpen(false)}>
-              <img className="shoppingCart-close" src={x} alt="X" />
+            <div className="icon-wrapper-large" onClick={() => setOpen(false)}>
+              <img className="shoppingCart-close" src={close} alt="X" />
             </div>
           </div>
 
 
-          <CheckoutRegister setOpen={setOpen} open={open} setLength={setLength} type="cart"/>
-              
+          <CheckoutRegister setOpen={setOpen} open={open} setLength={setLength} type="cart" />
+
 
 
 

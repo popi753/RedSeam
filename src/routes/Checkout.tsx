@@ -1,17 +1,14 @@
 import { useState,useCallback, useRef} from 'react'
-
 import { useNavigate } from 'react-router-dom'
+
+import { onCheckout } from '../model/cart'
 
 import CheckoutRegister from '../components/CheckoutRegister'
 import Input from '../components/Input'
 
-import { onCheckout } from '../model/cart'
-
 import envelope from "../assets/envelope.svg"
-import x from "../assets/x.svg"
+import close from "../assets/close.svg"
 import check from "../assets/check.svg"
-
-
 
 import '../styles/checkout.css'
 
@@ -43,29 +40,23 @@ export default function Checkout() {
         const address = (document.getElementById("address") as HTMLInputElement).value;
         const zip_code = (document.getElementById("zip_code") as HTMLInputElement).value;
 
-        onCheckout(
-            {token,
-                data: {name, surname, email, address, zip_code}
-            }
+        onCheckout({token,data: {name, surname, email, address, zip_code}}
         ).then((res) => {
                     if (res instanceof Error) {
                             console.error("Product fetch failed");
                         } else {
-                            // setShowModal(true);
                             dialogRef.current?.showModal();
-
                         };
                     }).catch((error) => {
                         console.error("Checkout failed");
                         setError(prev => ({ ...prev, ...error }));
                         });
         },[]);
-    const close = useCallback(()=>{
+
+    const closeDialog = useCallback(()=>{
         dialogRef.current?.close();
         navigate("/");
             },[])
-
-
 
     return(
         <>
@@ -92,18 +83,13 @@ export default function Checkout() {
                         </div>
                     </div>
 
-                    <CheckoutRegister open={true} type='checkout' 
-                    checkout={checkout} 
-                    />
-
+                    <CheckoutRegister open={true} type='checkout' checkout={checkout}/>
                 </div>
-
             </div>
-
-                <dialog ref={dialogRef} className="checkout-success-modal" onClick={() => dialogRef.current?.close()}>
+                <dialog ref={dialogRef} className="checkout-success-modal" onClick={() => closeDialog()}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>
                         <div className="icon-wrapper-huge">
-                            <img className='checkout-close' src={x} alt="X" onClick={()=>close()}/>
+                            <img className='checkout-close' src={close} alt="X" onClick={()=>closeDialog()}/>
                         </div>
                             <div className="successful-checkout-container">
                                 <div className="icon-wrapper-check">
@@ -113,12 +99,10 @@ export default function Checkout() {
                                         <p>Congrats!</p>
                                         <span>Your order is placed successfully.</span>
                                     </div>
-                                 <button className='orange-btn small-btn' onClick={() => { close()}}>Continue shopping</button>
+                                 <button className='orange-btn small-btn' onClick={() => { closeDialog()}}>Continue shopping</button>
                             </div> 
-                        
                     </div>
                 </dialog>
-
         </>
     )
 }

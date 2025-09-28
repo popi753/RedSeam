@@ -1,6 +1,5 @@
 .listing-page {
     width: 100%;
-    /* flex-grow: 1; */
     display: flex;
     flex-flow: column wrap;
 }
@@ -66,7 +65,7 @@
     color: var(--dark-blue2);
 }
 
-.x-icon {
+.filter-close {
     position: absolute;
     width: 6.75px;
     height: 6.75px;
@@ -87,12 +86,10 @@
 .products-body_list {
     display: flex;
     flex-flow: row wrap;
-    gap: 24px;
+    gap: 48px 24px;
     width: 1720px;
     flex-grow: 1;
 }
-
-
 
 
 

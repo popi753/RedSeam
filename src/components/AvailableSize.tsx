@@ -1,31 +1,30 @@
 
 import '../styles/availableSize.css'
 
-
 type props = {
-    size:string;
+    size: string;
     selectedSize: boolean;
     setSelectedSize: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function AvailableSize({size,selectedSize,setSelectedSize}:props) {
-        return(
-            <>
-                <div key={size} className="available-size"
-                                            style={{
-                                                    borderColor: selectedSize ? "var(--dark-blue)" : "var(--border-color)",
-                                                }}
-                                onClick={() => setSelectedSize(size)}>
-                                                <input type="radio" name="size" value={size}
-                                                checked={selectedSize}
-                                                onChange={(e) => setSelectedSize(e.target.value)}
-                                                />
-                                                <span 
-                                                title={size}
-                                                >
-                                                {size}
-                                                </span>
-                                         </div>
-            </>
-        )
+export default function AvailableSize({ size, selectedSize, setSelectedSize }: props) {
+    return (
+        <>
+            <div className="available-size"
+                style={{
+                    borderColor: selectedSize ? "var(--dark-blue)" : "var(--border-color)",
+                }}
+                onClick={() => setSelectedSize(size)}>
+                <input type="radio" name="size" value={size}
+                    checked={selectedSize}
+                    onChange={(e) => setSelectedSize(e.target.value)}
+                />
+                <span
+                    title={size}
+                >
+                    {size}
+                </span>
+            </div>
+        </>
+    )
 }

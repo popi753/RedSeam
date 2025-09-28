@@ -1,10 +1,10 @@
-import { useEffect, useRef} from "react"
-
-import '../styles/filter.css'
+import { useEffect, useRef, useCallback } from "react"
 
 import Input from "./Input"
 
 import filter from "./../assets/filter.svg"
+
+import '../styles/filter.css'
 
 type filterProps = {
     setFrom: React.Dispatch<React.SetStateAction<string>>;
@@ -26,12 +26,11 @@ export default function Filter({ setFrom, setTo }: filterProps) {
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
 
-
-    function handleSubmit(e: React.FormEvent) {
+    const handleSubmit = useCallback((e: React.FormEvent) => {
         e.preventDefault();
         setFrom((e.target as HTMLFormElement).from.value);
         setTo((e.target as HTMLFormElement).to.value);
-    };
+    }, []);
 
     return (
         <>

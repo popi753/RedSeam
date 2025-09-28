@@ -42,10 +42,9 @@ table {
 	border-spacing: 0;
 }
 
-
-
-
-
+select{
+	cursor: pointer;
+}
 
 a{
   color: black;
