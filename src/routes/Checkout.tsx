@@ -1,4 +1,4 @@
-import { useState,useCallback} from 'react'
+import { useState,useCallback, useRef} from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -8,6 +8,10 @@ import Input from '../components/Input'
 import { onCheckout } from '../model/cart'
 
 import envelope from "../assets/envelope.svg"
+import x from "../assets/x.svg"
+import check from "../assets/check.svg"
+
+
 
 import '../styles/checkout.css'
 
@@ -21,14 +25,17 @@ type error = {
 
 export default function Checkout() {
 
+    const dialogRef = useRef<HTMLDialogElement>(null);
+
     const navigate = useNavigate();
 
     const token = window.localStorage.getItem("token") || "";
+    const localStorageEmail = window.localStorage.getItem("email") || "";
+
+    const [email, setEmail] = useState<string>(localStorageEmail);
 
     const [error, setError] = useState<error>({ name: "", surname: "", email: "", address: "", zip_code: "" });
     
-    const [showModal, setShowModal] = useState(false);
-
      const checkout = useCallback(() => {
         const name = (document.getElementById("name") as HTMLInputElement).value;
         const surname = (document.getElementById("surname") as HTMLInputElement).value;
@@ -44,7 +51,8 @@ export default function Checkout() {
                     if (res instanceof Error) {
                             console.error("Product fetch failed");
                         } else {
-                            setShowModal(true);
+                            // setShowModal(true);
+                            dialogRef.current?.showModal();
 
                         };
                     }).catch((error) => {
@@ -52,6 +60,11 @@ export default function Checkout() {
                         setError(prev => ({ ...prev, ...error }));
                         });
         },[]);
+    const close = useCallback(()=>{
+        dialogRef.current?.close();
+        navigate("/");
+            },[])
+
 
 
     return(
@@ -69,6 +82,7 @@ export default function Checkout() {
                             <div className="checkout-form-wrapper">
                                 <Input minLength={1}  type="email" id='email' placeholder=' ' labelPlaceholder="Email" required={true} error={error.email}  checkoutEmail={true}
                                        icon={envelope} iconClassName='envelope'
+                                       value={email} setValue={setEmail}
                                       />
                             </div>
                             <div className="checkout-form-wrapper">
@@ -86,15 +100,24 @@ export default function Checkout() {
 
             </div>
 
-            {showModal && (
-                <dialog open className="checkout-success-modal" onClick={() => setShowModal(false)}>
+                <dialog ref={dialogRef} className="checkout-success-modal" onClick={() => dialogRef.current?.close()}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>
-                    <h2>Congrats!</h2>
-                    <p>Your order is placed successfully.</p>
-                    <button className='orange-btn small-btn' onClick={() => { setShowModal(false); navigate("/"); }}>Continue shopping</button>
+                        <div className="icon-wrapper-huge">
+                            <img className='checkout-close' src={x} alt="X" onClick={()=>close()}/>
+                        </div>
+                            <div className="successful-checkout-container">
+                                <div className="icon-wrapper-check">
+                                    <img className='check' src={check} alt="Check" />
+                                </div>
+                                    <div className="successful-checkout-container-text">
+                                        <p>Congrats!</p>
+                                        <span>Your order is placed successfully.</span>
+                                    </div>
+                                 <button className='orange-btn small-btn' onClick={() => { close()}}>Continue shopping</button>
+                            </div> 
+                        
                     </div>
                 </dialog>
-            )}
 
         </>
     )

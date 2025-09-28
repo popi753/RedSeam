@@ -28,7 +28,7 @@ export default function Register({ setHaveAcc }: registerProps) {
 
     const navigate = useNavigate();
 
-    const [_user, setUser] = useContext<contextType>(UserContext) || [];
+    const [_loggedIn, setLoggedIn] = useContext<contextType>(UserContext) || [];
 
   
     const [error, setError] = useState<error>({ username: "", email: "", password: "", password_confirmation: "", avatar: "" });
@@ -67,8 +67,8 @@ export default function Register({ setHaveAcc }: registerProps) {
 
 
 
-        onRegister({ formData }).then((res) => {
-            setUser && setUser({ email: res.user.email || "", avatar: res.user.avatar || null });
+        onRegister({ formData }).then(() => {
+            setLoggedIn && setLoggedIn(true);
             navigate("/")
         }).catch((error) => {
             setError(prev => ({ ...prev, ...error }));

@@ -74,9 +74,12 @@ body {
 
 .icon-wrapper-tiny:hover
 ,.icon-wrapper-small:hover
+,.icon-wrapper-medium:hover
 ,.icon-wrapper-big:hover
-,.icon-wrapper-large:hover{
+,.icon-wrapper-large:hover
+,.icon-wrapper-huge:hover{
   background-color: var(--hover-bg-color);
+  transition: background-color 0.3s ease;
 }
 
 .icon-wrapper-tiny{
@@ -115,6 +118,21 @@ body {
 }
 
 .icon-wrapper-huge{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.icon-wrapper-check{
+  position: relative;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background-color: var(--img-bg-color);
+}
+
+.icon-wrapper-hugeCart{
   position: relative;
   width: 100px;
   height: 100px;

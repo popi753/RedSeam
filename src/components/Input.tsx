@@ -14,10 +14,12 @@ type inputProps = {
     iconClassName? : string; 
     checkout? : boolean;
     checkoutEmail? : boolean;
+    value?: string;
+    setValue?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 
-export default function Input({type, placeholder,minLength, checkoutEmail,checkout, labelPlaceholder,error, id, required,icon,iconClassName}:inputProps){
+export default function Input({type, placeholder,minLength, checkoutEmail,checkout, labelPlaceholder,error, id, required,icon,iconClassName,value,setValue}:inputProps){
 
     function changeVisibility(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
         const input = (e.currentTarget as HTMLElement)
@@ -33,6 +35,8 @@ export default function Input({type, placeholder,minLength, checkoutEmail,checko
             <>
                                 <div className="input-wrapper">
                                     <input 
+                                           value={value}
+                                           onChange={(e) => setValue && setValue(e.target.value)}
                                            autoComplete='off'
                                            minLength={minLength} 
                                            type={type} 

@@ -12,34 +12,29 @@ import Layout from "./components/Layout"
 import ShoppingCart from "./components/ShoppingCart";
 
 
-type user = {
-  email : string,
-  avatar: string | null,
-}
-
 function App() {
 
   const token = window.localStorage.getItem("token");
 
 
-  useEffect(() => {
-      token && setUser({ email: " ", avatar: null });
+    useEffect(() => {
+        token && setLoggedIn(true);
     }, [token]);
 
   
-  const [user, setUser] = useState<user>({ email: "", avatar: null });
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [open,setOpen] = useState<boolean>(false);
 
   return(
     <>
-        <UserContext.Provider value={[user, setUser]}>
+        <UserContext.Provider value={[loggedIn, setLoggedIn]}>
             
                 <Routes>
                     <Route path="/" element={<Layout 
                      setOpen={setOpen}/>}>
                         <Route index  element={<Products />} />
                         <Route path="/products/:id" element={<Product/>} />
-                        {user?.email ? 
+                        {loggedIn ? 
                                    <> 
                                    <Route path="/checkout" element={<Checkout />} />
                                    </>
@@ -52,7 +47,7 @@ function App() {
             
                 </Routes>
 
-                        {user?.email && <ShoppingCart 
+                        {loggedIn && <ShoppingCart 
                          open={open} setOpen={setOpen} />}
 
         </UserContext.Provider>
@@ -63,8 +58,8 @@ function App() {
 
 
 export type contextType = null | [
-  user: user,
-  setUser: React.Dispatch<React.SetStateAction<user>>,
+  loggedIn: boolean,
+  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
 ];
 
 export const UserContext = createContext<contextType>(null);

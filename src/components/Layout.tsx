@@ -7,9 +7,9 @@ import { UserContext, type contextType} from "../App";
 import "../styles/layout.css"
 
 import logo from "./../assets/logo.svg"
-import avatar from "./../assets/avatar.svg"
+import avatar_svg from "./../assets/avatar.svg"
 import cart from "./../assets/cart.svg"
-import avatar_photo from "./../assets/avatar-photo.svg"
+import avatarPhoto from "./../assets/avatarPhoto.svg"
 
 type layoutProps = {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,13 +17,14 @@ type layoutProps = {
 
 
 export default function Layout({
-    // cartRef,
     setOpen}: layoutProps) {
 
     
+    const avatar = localStorage.getItem("avatar");
 
     
-    const [user, _setUser] = useContext<contextType>(UserContext) || [null, () => {}];
+    const [loggedIn, _setLoggedIn] = useContext<contextType>(UserContext) || [null, () => {}];
+
 
     return (
         <>
@@ -42,7 +43,7 @@ export default function Layout({
                     </Link>
 
             
-                {user?.email ?
+                {loggedIn ?
                     <div className="header_log-container">
                         <div className="icon-wrapper-big" onClick={()=>{
                             setOpen(true);
@@ -50,15 +51,15 @@ export default function Layout({
                             <img src={cart} className="cart" alt="cart" />
                         </div>
                         <div className="avatar-photo-wrapper">
-                            {user?.avatar ? <img src={user.avatar} className="avatar-photo" alt="avatar-photo" /> 
-                                            : <img src={avatar_photo} className="avatar-photo" alt="avatar-photo" /> }
+                            {(loggedIn && avatar) ? <img src={avatar} className="avatar-photo" alt="avatar-photo" /> 
+                                            : <img src={avatarPhoto} className="avatar-photo" alt="avatar-photo" /> }
                         </div>
                     </div>
                 : 
                     <Link to={"/auth"}>
                         <div className="header_auth-container">
                             <div className="icon-wrapper-medium">
-                                <img src={avatar} className="avatar" alt="avatar" />
+                                <img src={avatar_svg} className="avatar" alt="avatar" />
                             </div>
                             Log in
                         </div>

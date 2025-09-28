@@ -138,7 +138,6 @@ type checkoutProps = {
 
 
 export async function onCheckout({token,data}:checkoutProps): Promise<void | Error> {
-  console.log(data)
   const finalurl = url + "/cart/checkout";
   try {
     const response = await fetch(finalurl, {
@@ -158,9 +157,7 @@ export async function onCheckout({token,data}:checkoutProps): Promise<void | Err
             };
             throw result.errors || {"name": "something went wrong"};
     };
-    const result = await response.json();
-    console.log(result)
-
+    // const result = await response.json();
   } catch (error: any) {
     throw (error);
   }

@@ -7,6 +7,9 @@ import { onFetchCart, onDeleteCart,onUpdateCart,type productObj } from "../model
 
 import cart from "../assets/cart.svg"
 
+import "../styles/checkoutRegister.css"
+
+
 type checkoutRegisterProps = {
   open: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,7 +36,7 @@ export default function CheckoutRegister({open,setOpen,setLength,type, checkout}
 
 
 const subTotal : number = useMemo(() => {
-  return products.reduce((sum, element) => sum + element.quantity * element.price, 0);
+  return products.reduce((sum, product: productObj) => sum + product.quantity * product.price, 0);
 }, [products]);
 
 
@@ -71,7 +74,7 @@ const subTotal : number = useMemo(() => {
 
          {error ? <p>{error}</p>
             : !products.length ? <div className="shoppingCart-empty">
-                                          <div className="icon-wrapper-huge">
+                                          <div className="icon-wrapper-hugeCart">
                                             <img className="huge-cart" src={cart} alt="cart" />
                                           </div>
               <p className="ops">Ooops!</p>    

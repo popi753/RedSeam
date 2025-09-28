@@ -72,5 +72,13 @@
 
 .avatar-photo-wrapper{
     width: 40px;
+    height: 40px;
+}
+
+.avatar-photo{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 

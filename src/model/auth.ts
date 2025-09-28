@@ -25,8 +25,7 @@ const finalUrl = url + "/register";
         const result = await response.json();
         window.localStorage.setItem("token", result.token);
         window.localStorage.setItem("email", result.user.email);
-
-
+        window.localStorage.setItem("avatar", result.user.avatar || "");
         return result;
     } catch (error:any) {
         throw (error);
@@ -65,6 +64,7 @@ const finalUrl = url + "/login";
         const result = await response.json();
         window.localStorage.setItem("token", result.token);
         window.localStorage.setItem("email", result.user.email);
+        window.localStorage.setItem("avatar", result.user.avatar || "");
         return result;
     } catch (error:any) {
         throw (error);

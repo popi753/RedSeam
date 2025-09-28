@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useMemo } from 'react'
 import { useSearchParams, useNavigate } from "react-router-dom";
 
 import {type product, type meta, onFetchProducts} from '../model/productsFetch'
@@ -13,7 +13,7 @@ import Card from '../components/Card'
 import Pagination from '../components/Pagination'
 
 export default function Products() {
-
+    
     const navigate = useNavigate();
 
     const [products, setProducts] = useState<product[]>([]);
@@ -27,6 +27,47 @@ export default function Products() {
     const [page, setPage] = useState<string>(searchParams.get("page") || "");
 
     const [error, setError] = useState<boolean>(false);
+
+
+    const pageArr : (number | string)[] = useMemo(() => {
+                        const currentPage = meta?.current_page || 1;
+                        const totalPages = meta?.last_page || 1;
+                        const pages = [];
+                        // Always show first 2 pages
+                        for (let i = 1; i <= Math.min(2, totalPages); i++) {
+                            pages.push(i);
+                        }
+                        
+                        // Add dots if gap exists
+                        if (currentPage > 4) {
+                            pages.push('...');
+                        }
+                        
+                        // Add neighbors (current page and adjacent pages)
+                        const start = Math.max(3, currentPage - 1);
+                        const end = Math.min(totalPages - 2, currentPage + 1);
+                        
+                        for (let i = start; i <= end; i++) {
+                            if (!pages.includes(i)) {
+                            pages.push(i);
+                            }
+                        }
+                        
+                        // Add dots if gap exists
+                        if (currentPage < totalPages - 3) {
+                            pages.push('...');
+                        }
+                        
+                        // Always show last 2 pages
+                        for (let i = Math.max(totalPages - 1, 3); i <= totalPages; i++) {
+                            if (!pages.includes(i)) {
+                            pages.push(i);
+                            }
+                        }
+                        
+                        return pages;
+    },[meta?.current_page, meta?.last_page]);
+
 
     useEffect(() => {
         onFetchProducts({ page, from, to, sort }).then((res) => {
@@ -85,7 +126,8 @@ export default function Products() {
                                 )) : "No products found"
                                 }
                             </div>
-                            <Pagination meta={meta} page={page || "1"} setPage={setPage} />
+                            {meta?.total ? <Pagination page={page || "1"} setPage={setPage} pageArr={pageArr} /> : null}
+                            
                         </>}
                 </div>
             </div>

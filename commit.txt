@@ -1,10 +1,8 @@
-Refactor authentication and checkout components; introduce reusable Input component
+refactor: change pagination, change user context with boolean
 
-- Updated App component to conditionally render Checkout and Auth routes based on user authentication.
-- Added new Input component for consistent input handling across forms.
-- Created CheckoutRegister component to manage checkout process and cart interactions.
-- Enhanced Cart-item component to streamline product quantity updates.
-- Implemented error handling and state management for checkout process.
-- Introduced new styles for checkout and input components for improved UI.
-- Added envelope SVG asset for email input field.
-- Cleaned up unused code and optimized existing components for better performance.
+
+- Changed pagination with more dynamic one
+- Changed user context usage with localstorage and left just boolean
+- Finished checkout Page modal 
+- Used state inside email checkout input
+

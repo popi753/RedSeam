@@ -17,7 +17,7 @@ export default function Login({ setHaveAcc }: loginProps) {
 
     const navigate = useNavigate();
 
-    const [_user, setUser] = useContext<contextType>(UserContext) || [];
+    const [_loggedIn, setLoggedIn] = useContext<contextType>(UserContext) || [];
 
     type error = {
         email: string,
@@ -35,8 +35,8 @@ export default function Login({ setHaveAcc }: loginProps) {
             password: form.password.value
         }
 
-        onLogin(formData).then((res) => {
-            setUser && setUser({ email: res.user.email || "", avatar: res.user.avatar || null });
+        onLogin(formData).then(() => {
+            setLoggedIn && setLoggedIn(true);
             navigate("/")
         }).catch((error) => {
             setError(prev => ({ ...prev, ...error }));

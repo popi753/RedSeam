@@ -59,17 +59,62 @@
 
 
 .checkout-success-modal {
-  background-color: #ffffff;
+  padding: 30px;
+  border: 1px solid var(--grey);
   border: none;
   position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 2000;
 }
 .modal-content {
   background: #fff;
-  padding: 32px 48px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.checkout-success-modal::backdrop {
+  background: var(--overlay-bg-color);
+}
+
+
+.checkout-close{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    left: 10px;
+}
+
+.successful-checkout-container{
+    padding: 84px 321px 145px 321px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.check{
+    position: absolute;
+width: 36px;
+height: 29px;
+top: 24px;
+left: 20px;
+}
+
+.successful-checkout-container-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 34px;
+}
+
+.successful-checkout-container-text > p{
+    font-size: 42px;
+    font-weight: 600;
+}
+
+.successful-checkout-container-text > span{
+    font-size: 14px;
 }

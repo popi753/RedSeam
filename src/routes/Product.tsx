@@ -1,9 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 
 import '../styles/product.css'
-
-import { UserContext, type contextType} from "../App";
 
 
 import { onFetchProduct, type productObj } from "../model/productsFetch";
@@ -49,7 +47,6 @@ const colorMap = {
 
 export default function Product() {
 
-    const [_user,setUser] = useContext<contextType>(UserContext) || [null, () => {}];
 
     const { id } = useParams();
     const [product, setProduct] = useState<productObj | null>(null);
@@ -114,7 +111,6 @@ export default function Product() {
                     const token = window.localStorage.getItem("token") || "";
 
                     if(!token){
-                        setUser && setUser({email: "", avatar: null});
                         alert("Please log in to add items to your cart.");
                         return;
                     }

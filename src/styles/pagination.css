@@ -12,8 +12,6 @@
     gap: 8px;
 }
 
-
-
 .arrow-left,
 .arrow-right {
     position: absolute;
@@ -41,3 +39,4 @@
     border-color: var(--orange-color);
     color: var(--orange-color);
 }
+
